@@ -3,7 +3,8 @@
   "description": "Responsive layout, with several features.",
   "main": "vaadin-board.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#2.0-preview"
+    "polymer": "Polymer/polymer#2.0-preview",
+    "css-element-queries": "^0.4.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0",
