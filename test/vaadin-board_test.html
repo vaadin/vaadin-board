@@ -16,7 +16,7 @@
   <body>
     <test-fixture id="basic-board-row">
       <template>
-          <vaadin-board-row>
+          <vaadin-board-row style="width:1600px">
             <div>top A</div>
             <div>top B</div>
             <div>top C</div>
@@ -31,8 +31,7 @@
         test('Four items take 25% each on Desktop.', function () {
           var row = fixture('basic-board-row');
 
-          var parentWidth = 1600;
-          row.style.width = parentWidth + "px";
+          var parentWidth = row.getBoundingClientRect().width;
 
           var children = row.querySelectorAll("div");
           for (let i = 0; i < children.length; i++) {
