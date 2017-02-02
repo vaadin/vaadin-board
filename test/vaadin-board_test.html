@@ -33,7 +33,7 @@
           <div>top D</div>
         </vaadin-board-row>
       </template>
-    </test-fixture>1
+    </test-fixture>
     <test-fixture id="mobile-board-row">
       <template>
         <vaadin-board-row style="width:310px">
@@ -69,7 +69,7 @@
             var rect = children[i].getBoundingClientRect();
 
             assert.equal(rect.left, (i%2 * rowRect.width / 2)+rowRect.left);
-            assert.equal(rect.top, (Math.floor(i/2) * rowRect.height / 2)+rowRect.top);
+            assert.approximately(rect.top, (Math.floor(i/2) * rowRect.height / 2)+rowRect.top,1);
           }
         });
 
@@ -81,7 +81,7 @@
           for (let i = 0; i < children.length; i++) {
             var rect = children[i].getBoundingClientRect();
 
-            assert.equal(rect.left, rowRect.left);
+            assert.equal(rect.left, rowRect.left, "Row and content left are equal");
             assert.approximately(rect.top, (i * rowRect.height / 4)+rowRect.top, 1);
           }
         });

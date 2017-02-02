@@ -24,21 +24,13 @@
       static get is() {
         return "vaadin-board-row";
       }
-      static get config() {
-        return {
-          oldWidth: {
-            type: Number,
-            value: 0
-          },
-          oldFlexBasis: {
-            type: String,
-            value: '0'
-          }
-        }
-      }
       constructor() {
         super();
         this._onIronResize = this._onIronResize.bind(this);
+        this._oneColumnMaxWidth = 600;
+        this._twoColumnsMaxWidth = 1000;
+        this._oldWidth = 0;
+        this._oldFlexBasis = '0';
       }
       ready() {
         super.ready();
@@ -50,20 +42,20 @@
       }
       _onIronResize(e) {
         const width = this.getBoundingClientRect().width;
-        if (width != this.oldWidth) {
+        if (width != this._oldWidth) {
           const nodes = this.$.insertionPoint.assignedNodes();
           const filteredNodes = nodes.filter(node => node.nodeType !== node.TEXT_NODE);
           var newFlexBasis = '25%';
-          if (width < 600) {
+          if (width < this._oneColumnMaxWidth) {
             newFlexBasis = '100%';
-          } else if (width < 1000) {
+          } else if (width < this._twoColumnsMaxWidth) {
             newFlexBasis = '50%';
           }
-          if (newFlexBasis != this.oldFlexBasis) {
+          if (newFlexBasis != this._oldFlexBasis) {
             filteredNodes.forEach(e=>e.style.flexBasis = newFlexBasis);
-            this.oldFlexBasis = newFlexBasis;
+            this._oldFlexBasis = newFlexBasis;
           }
-          this.oldWidth = width;
+          this._oldWidth = width;
         }
       }
     }
