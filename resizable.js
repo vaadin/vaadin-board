@@ -34,7 +34,9 @@ let Resizable = (superclass) => class extends superclass {
             this.dispatchEvent(new CustomEvent('iron-request-resize-notifications', {
                 node: this,
                 bubbles: true,
-                cancelable: true
+                cancelable: true,
+                composed:true,
+                detail:{}
             }));
             if (!this._parentResizable) {
                 window.addEventListener('resize', this._boundNotifyResize, true);
@@ -43,8 +45,15 @@ let Resizable = (superclass) => class extends superclass {
         }.bind(this));
     }
     ready() {
-        this.addEventListener('iron-request-resize-notifications',this._onIronRequestResizeNotifications.bind(this));
         super.ready();
+        this.addEventListener('iron-request-resize-notifications',
+            function (event) {
+                //for some reason this - is undefined in FF
+                //we use currentTarget as it equals to this
+                event.currentTarget._onIronRequestResizeNotifications(event);
+            }
+        );
+
     }
     _onIronRequestResizeNotifications(event) {
         var target = event.composedPath()[0];
@@ -82,7 +91,7 @@ let Resizable = (superclass) => class extends superclass {
                 this._notifyDescendant(resizable);
             }
         }, this);
-        this._fireResize.bind(this)();
+        this._fireResize();
     }
 
     /**
@@ -115,7 +124,7 @@ let Resizable = (superclass) => class extends superclass {
      * @return {boolean} True if the `element` should be notified of resize.
      */
     resizerShouldNotify(element) {
-        return true;
+        return element.isConnected;
     }
 
     _onDescendantIronResize(event) {
