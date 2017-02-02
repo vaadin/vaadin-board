@@ -2,7 +2,7 @@
 
 # \<vaadin-board\>
 
-Responsive layout, with several features.
+Allows to add responsive layouts., with several features.
 
 
 ## License
@@ -13,11 +13,45 @@ Vaadin Board is distributed under [Commercial Vaadin Add-on License version 3](h
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-## Viewing Your Application
+## Using Vaadin Board in your project
+
+### Install Vaadin Board
+```
+$ bower install --save vaadin/vaadin-board
+```
+
+### Add html import
+<link rel="import" href="bower_components/vaadin/vaadin-board.html">
+
+### Create your first Vaadin Board
+
+        <vaadin-board-row>
+          <div class="top a">top A</div>
+          <div class="top b">top B</div>
+          <div class="top c">top C</div>
+          <div class="top d">top D</div>
+        </vaadin-board-row>
+        <vaadin-board-row>
+          <div class="mid">mid</div>
+        </vaadin-board-row>
+        <vaadin-board-row>
+          <div class="low a">low A</div>
+          <vaadin-board-row>
+            <div class="top a">low B / A</div>
+            <div class="top b">low B / B</div>
+            <div class="top c">low B / C</div>
+            <div class="top d">low B / D</div>
+          </vaadin-board-row>
+        </vaadin-board-row>
+      </vaadin-board>
+
+## Viewing Demo Application
 
 ```
 $ polymer serve
 ```
+
+Go to http://localhost:8080/components/vaadin-board/demo/index.html to see the demo.
 
 ## Building Your Application
 
