@@ -27,8 +27,8 @@
       constructor() {
         super();
         this._onIronResize = this._onIronResize.bind(this);
-        this._oneColumnMaxWidth = 600;
-        this._twoColumnsMaxWidth = 1000;
+        this._ONE_COLUMN_MAX_WIDTH = 600;
+        this._TWO_COLUMNS_MAX_WIDTH = 1000;
         this._oldWidth = 0;
         this._oldFlexBasis = '0';
       }
@@ -46,9 +46,9 @@
           const nodes = this.$.insertionPoint.assignedNodes();
           const filteredNodes = nodes.filter(node => node.nodeType !== node.TEXT_NODE);
           var newFlexBasis = '25%';
-          if (width < this._oneColumnMaxWidth) {
+          if (width < this._ONE_COLUMN_MAX_WIDTH) {
             newFlexBasis = '100%';
-          } else if (width < this._twoColumnsMaxWidth) {
+          } else if (width < this._TWO_COLUMNS_MAX_WIDTH) {
             newFlexBasis = '50%';
           }
           if (newFlexBasis != this._oldFlexBasis) {
