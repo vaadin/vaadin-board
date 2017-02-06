@@ -2,8 +2,9 @@
 
 # \<vaadin-board\>
 
-Allows to add responsive layouts., with several features.
-
+Vaadin Board is a new flexible layout that allows you to build nice looking dashboard or intro screens to your application.
+Vaadin Board key feature is how it effectively reorders the widgets on different screen sizes, maximizing the use of space and looking stunning.
+Vaadin Board is using [Polymer 2](https://github.com/polymer/polymer/tree/2.0-preview)
 
 ## License
 
@@ -11,25 +12,25 @@ Vaadin Board is distributed under [Commercial Vaadin Add-on License version 3](h
 
 ## Install the Polymer-CLI
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
+First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed.
+Then run `polymer serve` to serve your application locally.
 
 ## Using Vaadin Board in your project
 
-### Install Vaadin Board
+1. Install dependency from bower `bower install vaadin-board`
+2. Add html import to your project and web-components polyfills.
 ```
-$ bower install --save vaadin/vaadin-board
+ <link rel="import" href="bower_components/vaadin/vaadin-board.html">
+ <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 ```
 
-### Add html import
-<link rel="import" href="bower_components/vaadin/vaadin-board.html">
+3. Create your first Vaadin Board
 
-### Create your first Vaadin Board
-
+```
         <vaadin-board-row>
-          <div class="top a">top A</div>
+          <div class="top a" boar-span=2>top A</div>
           <div class="top b">top B</div>
-          <div class="top c">top C</div>
-          <div class="top d">top D</div>
+          <div class="top d">top C</div>
         </vaadin-board-row>
         <vaadin-board-row>
           <div class="mid">mid</div>
@@ -44,36 +45,19 @@ $ bower install --save vaadin/vaadin-board
           </vaadin-board-row>
         </vaadin-board-row>
       </vaadin-board>
+```
 
 ## Viewing Demo Application
 
-```
-$ polymer serve
-```
+1. Clone the repository `git clone https://github.com/vaadin/vaadin-board.git`
+2. Install [polyserve](https://www.npmjs.com/package/polyserve): `npm install -g polyserve`
+3. When in the `vaadin-board` directory, run `bower install` to install dependencies
+4. When in the `vaadin-board` directory, run `polyserve` to start the server.
+5. Go to http://localhost:8080/components/vaadin-board/demo/index.html to see the demo.
+
 
 Go to http://localhost:8080/components/vaadin-board/demo/index.html to see the demo.
 
-## Building Your Application
-
-```
-$ polymer build
-```
-
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
-
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
-
-```
-$ polymer serve build/bundled
-```
-
 ## Running Tests
 
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+Run `polymer test` to run your application's test suite locally.
