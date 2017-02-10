@@ -1,6 +1,7 @@
 {
   "name": "vaadin-board",
-  "description": "Responsive layout, with several features.",
+  "version": "1.0.0-alpha1",
+  "description": "Polymer element to create flexible responsive layouts and build nice looking dashboard.",
   "main": "vaadin-board.html",
   "dependencies": {
     "polymer": "Polymer/polymer#2.0-preview"
