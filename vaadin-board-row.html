@@ -34,12 +34,12 @@
       }
       ready() {
         super.ready();
-        this.addEventListener('iron-resize', this._onIronResize(false));
+        this.addEventListener('iron-resize', this._onIronResize);
         this.$.insertionPoint.addEventListener('slotchange', this.redraw.bind(this));
       }
       connectedCallback() {
         super.connectedCallback();
-        Polymer.RenderStatus.afterNextRender(this, this._onIronResize(false));
+        Polymer.RenderStatus.afterNextRender(this, this._onIronResize);
       }
       /**
        * Calculates flex basis based on colSpan and width
@@ -133,7 +133,7 @@
       redraw() {
         this._onIronResize(true);
       }
-      _onIronResize(forceResize) {
+      _onIronResize(forceResize = false) {
         const width = this.getBoundingClientRect().width;
         if (forceResize || width != this._oldWidth) {
           const nodes = this.$.insertionPoint.assignedNodes();
