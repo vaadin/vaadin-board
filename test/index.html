@@ -14,12 +14,55 @@
 //    WCT._config.environmentScripts.push('iron-test-helpers/mock-interactions.js');
 //    WCT._config.environmentScripts.push(location.href.replace(/[^/]+$/, '') + 'mock-touch-interactions.js');
 //    WCT._config.environmentScripts.push('webcomponentsjs/webcomponents-lite.js');
-    WCT.loadSuites([
+    let suites =[
         'vaadin-board_boardcols_test.html',
         'vaadin-board_light_dom_test.html',
         'vaadin-board_redraw_test.html',
         'vaadin-board_test.html'
-    ]);
+    ];
+
+    let urlParams =[
+            "",
+            "?wc-shadydom=true"
+    ]
+
+    /**
+     * Creates a cartesian product of two String arrays
+     * @param{Array}
+     * @param{Array}
+     *
+     * @return{Array} an ar that a product set of the arguments
+     */
+    function product(ar1, ar2) {
+        return ar1.reduce((acc,val) => {
+            let combined=ar2.reduce((acc2,val2) => {
+                acc2.push(val.concat(val2));
+                return acc2;
+            }, []);
+            acc.push(combined);
+            return acc;
+        }, []);
+    }
+
+    /**
+     * Flattens the array
+     * @param{Array} array to be flatten
+     *
+     * @return{Array} flatten array
+     */
+    function flatten(arr) {
+        return arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatten(val) : val), []);
+    }
+
+    /**
+     * @return{Array} an Array of test URLS with parameters
+     */
+    function createSuitesURLs() {
+        return flatten(product(suites,urlParams))
+    }
+
+
+    WCT.loadSuites(createSuitesURLs());
 </script>
 </body>
 
