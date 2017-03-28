@@ -1,0 +1,61 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+
+<!--
+Element used for demo purposes
+-->
+
+<dom-module id="demo-element">
+  <template>
+    <style>
+      :host {
+        font-weight: bold;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #000;
+        text-align: center;
+        background-color: #b5b5b5;
+      }
+
+      .number {
+        font-size: 2em;
+      }
+
+      .size {
+        font-size: 1em;
+      }
+
+      .other {
+        font-size: 1em;
+        text-align: justify;
+      }
+    </style>
+    <div class="number">[[itemNumber]]</div>
+    <div class="size">[[itemSize]]</div>
+    <div class="other">
+      <slot></slot>
+    </div>
+
+
+  </template>
+
+  <script>
+    class DemoElement extends Polymer.Element {
+      static get is() {
+        return 'demo-element';
+      }
+
+      static get properties() {
+        return {
+          itemNumber: {
+            type: String
+          },
+          itemSize: {
+            type: String
+          }
+        }
+      }
+
+    }
+    customElements.define(DemoElement.is, DemoElement);
+  </script>
+</dom-module>
