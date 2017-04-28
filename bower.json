@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "app-layout": "PolymerElements/app-layout#2.0-preview",
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "^1.0.0-rc.4",
     "test-fixture": "^2.0.0"
