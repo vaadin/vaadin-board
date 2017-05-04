@@ -36,12 +36,12 @@
             assert.include(row.className, 'small');
             //a size less than or equal to 640 will hide menu
             iframe.width = 640;
-            setTimeout(finalSizeCheck, 300);
+            setTimeout(finalSizeCheck, 500);
           };
           var setInitialSize = function () {
             //a size bigger than 640 will show menu
             iframe.width = 641;
-            setTimeout(initialSizeCheck, 300);
+            setTimeout(initialSizeCheck, 500);
           };
 
           iframe.contentWindow.addEventListener('WebComponentsReady', setInitialSize);
