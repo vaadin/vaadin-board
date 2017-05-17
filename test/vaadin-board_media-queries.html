@@ -39,9 +39,11 @@
             setTimeout(finalSizeCheck, 500);
           };
           var setInitialSize = function () {
-            //a size bigger than 640 will show menu
-            iframe.width = 641;
-            setTimeout(initialSizeCheck, 500);
+            setTimeout(function () {
+              //a size bigger than 640 will show menu
+              iframe.width = 641;
+              setTimeout(initialSizeCheck, 500);
+            }, 1000)
           };
 
           iframe.contentWindow.addEventListener('WebComponentsReady', setInitialSize);
