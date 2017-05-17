@@ -8,7 +8,7 @@ Vaadin Board is using [Polymer 2](https://github.com/polymer/polymer/tree/2.0-pr
 
 ## License
 
-Vaadin Board is distributed under [Commercial Vaadin Add-on License version 3](http://vaadin.com/license/cval-3) (CVALv3). For license terms, see LICENSE.txt.
+Vaadin Board is distributed under [Commercial Vaadin Add-on License version 3](http://vaadin.com/license/cval-3) (CVALv3). For license terms, see [LICENSE.txt](https://raw.githubusercontent.com/vaadin/vaadin-board/master/LICENSE.txt).
 
 ## Using Vaadin Board in your project
 
