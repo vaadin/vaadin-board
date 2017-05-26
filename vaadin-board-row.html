@@ -172,20 +172,25 @@
           const width = this.getBoundingClientRect().width;
           if (forceResize || width != this._oldWidth) {
             const nodes = this.$.insertionPoint.assignedNodes({ flatten: true });
+            const isElementNode = function (node) {
+              return !((node.nodeType === node.TEXT_NODE)
+              || (node instanceof Polymer.DomRepeat)
+              || (node instanceof Polymer.DomIf));
+            }
+            const filteredNodes = nodes.filter(isElementNode);
 
-            const filteredNodes = nodes.filter(node => node.nodeType !== node.TEXT_NODE);
-            this._addStyleNames(width);
-            const boardCols = this._parseBoardCols(filteredNodes);
-            const colsInRow = boardCols.reduce((a, b) => a + b, 0);
-            this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
-              let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow);
-              if (forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
-                this._oldFlexBasis[i] = newFlexBasis
-                e.style.flexBasis = newFlexBasis;
-              }
-            });
-            this._oldWidth = width;
-          }
+              this._addStyleNames(width);
+              const boardCols = this._parseBoardCols(filteredNodes);
+              const colsInRow = boardCols.reduce((a, b) => a + b, 0);
+              this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
+                let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow);
+                if (forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
+                  this._oldFlexBasis[i] = newFlexBasis
+                  e.style.flexBasis = newFlexBasis;
+                }
+              });
+              this._oldWidth = width;
+            }
         }
       }
       customElements.define(BoardRowElement.is, BoardRowElement);
