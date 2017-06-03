@@ -6,7 +6,7 @@
 `vaadin-board`
 Responsive layout, with several features.
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="vaadin-board">
@@ -23,17 +23,6 @@ Responsive layout, with several features.
     class VaadinBoard extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element) {
       static get is() {
         return 'vaadin-board';
-      }
-
-      static get config() {
-        return {
-          properties: {
-            prop1: {
-              value: 'Vaadin Board',
-              type: String
-            }
-          }
-        }
       }
 
       constructor() {
