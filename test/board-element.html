@@ -1,0 +1,31 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../vaadin-board.html">
+<link rel="import" href="../vaadin-board-row.html">
+
+<dom-module id="board-element">
+    <template>
+        <style>
+            :host {
+
+            }
+            vaadin-board {
+                width: var(--my-width);
+            }
+        </style>
+        <vaadin-board>
+            <vaadin-board-row>
+                <slot>
+                </slot>
+            </vaadin-board-row>
+        </vaadin-board>
+    </template>
+
+    <script>
+        class BoardElement extends Polymer.Element {
+            static get is() {
+                return 'board-element';
+            }
+        }
+        customElements.define(BoardElement.is, BoardElement);
+    </script>
+</dom-module>
