@@ -16,7 +16,7 @@ module.exports = {
         },
         {
           'browserName': 'Internet Explorer',
-          'platform': 'Windows 8.1',
+          'platform': 'Windows 7',
           'version': '11'
         },
         {
