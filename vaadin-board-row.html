@@ -11,16 +11,30 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
   <template>
     <style>
        :host {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         --small-size: var(--vaadin-board-width-small, 600px);
         --medium-size: var(--vaadin-board-width-medium, 960px);
       }
 
+      :host(.one-column) {
+        grid-template-columns: 1fr;
+      }
+
+      :host(.two-columns) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      :host(.three-columns) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      :host(.four-columns) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
        :host ::slotted(*) {
         box-sizing: border-box;
-        flex-grow: 1;
         overflow: hidden;
       }
     </style>
@@ -76,7 +90,6 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
 
           this._oldWidth = 0;
           this._oldBreakpoints = {'smallSize': 600, 'mediumSize': 960};
-          this._oldFlexBasis = [];
         }
 
         ready() {
@@ -117,25 +130,6 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
             this.classList.remove(this._MEDIUM_VIEWPORT_CLASSNAME);
             this.classList.add(this._LARGE_VIEWPORT_CLASSNAME);
           }
-        }
-
-        /**
-         * Calculates flex basis based on colSpan, width and breakpoints.
-         * @param {Number} colSpan colspan value of the row
-         * @param {Number} width width of the row in px
-         * @param {Number} colsInRow number of columns in the row
-         * @param {Object} breakpoints object with smallSize and mediumSize number properties, which tells
-         * where the row should switch rendering size in pixels.
-         */
-        _calculateFlexBasis(colSpan, width, colsInRow, breakpoints) {
-          if (width < breakpoints.smallSize) {
-            colsInRow = 1;
-          } else if (width < breakpoints.mediumSize && colsInRow == 4) {
-            colsInRow = 2;
-          }
-          let flexBasis = colSpan / colsInRow * 100;
-          flexBasis = flexBasis > 100 ? 100 : flexBasis;
-          return flexBasis + '%';
         }
 
         _reportError() {
@@ -211,14 +205,14 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
          * In most cases, a board row will redraw itself if your reconfigure it. If you dynamically change CSS which affects the row, then you need to call this method.
          */
         redraw() {
-          this._recalculateFlexBasis(true);
+          this._recalculateItemSizes(true);
         }
 
         _onIronResize() {
-          this._recalculateFlexBasis(false);
+          this._recalculateItemSizes(false);
         }
 
-        _recalculateFlexBasis(forceResize) {
+        _recalculateItemSizes(forceResize) {
           const width = this.getBoundingClientRect().width;
           const breakpoints = this._measureBreakpointsInPx();
           if (forceResize || width != this._oldWidth
@@ -230,16 +224,51 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
                 || (node instanceof Polymer.DomRepeat)
                 || (node instanceof Polymer.DomIf));
             }
+
             const filteredNodes = nodes.filter(isElementNode);
             this._addStyleNames(width, breakpoints);
             const boardCols = this._parseBoardCols(filteredNodes);
-            const colsInRow = boardCols.reduce((a, b) => a + b, 0);
-            this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
-              let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow, breakpoints);
-              if (forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
-                this._oldFlexBasis[i] = newFlexBasis
-                e.style.flexBasis = newFlexBasis;
+            var colsInRow = boardCols.reduce((a, b) => a + b, 0);
+            if (width < breakpoints.smallSize) {
+                colsInRow = 1;
+              } else if (width < breakpoints.mediumSize && colsInRow == 4) {
+                colsInRow = 2;
               }
+            this._setColumns(colsInRow);
+            var spaceUsedSoFar = 0;
+            this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
+
+              var itemSize = boardCols[i];
+              let nextItemSize = boardCols[i+1];
+              var placesLeft = colsInRow - (spaceUsedSoFar % colsInRow);
+
+              // an item can't take more columns than columns in a row
+              if(itemSize > colsInRow){
+                itemSize = colsInRow;
+              }
+
+              // If there is space on current row, but next item won't fit in, then expand the
+              // current item to take the rest of the space available in current row.
+              // Ie. 1-2-1 spans in two column size. second item won't fit to first row so expand
+              // first item to take the full row.
+              if (nextItemSize != null && itemSize < placesLeft && itemSize+nextItemSize > placesLeft) {
+                itemSize = placesLeft;
+              }
+              // If current item is the last in the row, and there is an empty space, expand
+              // it to take the whole row.
+              // Ie. 1-2-1 span. Last item is empty on the last row as second row needs an own
+              // row. Therefore last item should not only take first column of whole row, but
+              // expand to full row.
+              if (nextItemSize == null && itemSize < placesLeft){
+                itemSize = placesLeft
+              }
+
+              if (itemSize > 1) {
+                e.style.gridColumnEnd = "span " + itemSize;
+              } else {
+                e.style.gridColumnEnd = "";
+              }
+              spaceUsedSoFar = spaceUsedSoFar + itemSize;
             });
             this._oldWidth = width;
             this._oldBreakpoints = breakpoints;
@@ -274,6 +303,17 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
             breakpoints.mediumSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
             this.style.removeProperty(tmpStyleProp);
             return breakpoints;
+        }
+
+        _setColumns(columns) {
+          this.classList.remove("one-column","two-columns","three-columns","four-columns");
+          switch (columns) {
+            case 1: this.classList.add("one-column"); break;
+            case 2: this.classList.add("two-columns"); break;
+            case 3: this.classList.add("three-columns"); break;
+            case 4:
+            default: this.classList.add("four-columns"); break;
+          }
         }
       }
 
