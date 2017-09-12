@@ -229,7 +229,7 @@
                 itemSize = placesLeft
               }
               
-              if (itemSize > 1) {
+              if (itemSize > 1) {
                 e.style.gridColumnEnd = "span " + itemSize;
               } else {
                 e.style.gridColumnEnd = "";
@@ -240,8 +240,8 @@
               // column and row defined. Remove this when Edge has implemented current
               // support and we do not support IE10 / IE 11 anymore.
               e.style.msGridColumn = (spaceUsedSoFar % colsInRow)+1;
-              e.style.msGridRow = Math.floor(spaceUsedSoFar / colsInRow)+1;;
-              if (itemSize > 1) {
+              e.style.msGridRow = Math.floor(spaceUsedSoFar / colsInRow)+1;
+              if (itemSize > 1) {
                 e.style.msGridColumnSpan = itemSize;
               } else {
                 e.style.msGridColumnSpan = "";
