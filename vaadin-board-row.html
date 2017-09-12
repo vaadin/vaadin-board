@@ -6,23 +6,29 @@
     <style>
        :host {
         display: grid;
+        display: -ms-grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        -ms-grid-columns: 1fr 1fr 1fr 1fr;
       }
 
       :host(.one-column) {
         grid-template-columns: 1fr;
+        -ms-grid-columns: 1fr;
       }
 
       :host(.two-columns) {
         grid-template-columns: 1fr 1fr;
+        -ms-grid-columns: 1fr 1fr;
       }
 
       :host(.three-columns) {
         grid-template-columns: 1fr 1fr 1fr;
+        -ms-grid-columns: 1fr 1fr 1fr;
       }
 
       :host(.four-columns) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        -ms-grid-columns: 1fr 1fr 1fr 1fr;
       }
 
        :host ::slotted(*) {
@@ -200,8 +206,8 @@
               
               var itemSize = boardCols[i];
               let nextItemSize = boardCols[i+1];
-              var placesLeft = colsInRow - (spaceUsedSoFar % colsInRow);
-
+              let placesLeft = colsInRow - (spaceUsedSoFar % colsInRow);
+              
               // an item can't take more columns than columns in a row
               if(itemSize > colsInRow){
                 itemSize = colsInRow;
@@ -222,21 +228,37 @@
               if (nextItemSize == null && itemSize < placesLeft){
                 itemSize = placesLeft
               }
-
+              
               if (itemSize > 1) {
                 e.style.gridColumnEnd = "span " + itemSize;
               } else {
                 e.style.gridColumnEnd = "";
               }
+
+              // IE10, IE11 and Edge has an old, older implementation of the CSS Grid spec.
+              // That spec does not include auto placement, so each item needs to have 
+              // column and row defined. Remove this when Edge has implemented current
+              // support and we do not support IE10 / IE 11 anymore.
+              e.style.msGridColumn = (spaceUsedSoFar % colsInRow)+1;
+              e.style.msGridRow = Math.floor(spaceUsedSoFar / colsInRow)+1;;
+              if (itemSize > 1) {
+                e.style.msGridColumnSpan = itemSize;
+              } else {
+                e.style.msGridColumnSpan = "";
+              }
+              
+              //save for next iteration
               spaceUsedSoFar = spaceUsedSoFar + itemSize;
-            });
+            });    
             this._oldWidth = width;
           }
         }
 
-
         _setColumns(columns) {
-          this.classList.remove("one-column","two-columns","three-columns","four-columns");
+          this.classList.remove("one-column");
+          this.classList.remove("two-columns");
+          this.classList.remove("three-columns");
+          this.classList.remove("four-columns");
           switch (columns) {
             case 1: this.classList.add("one-column"); break;
             case 2: this.classList.add("two-columns"); break;
