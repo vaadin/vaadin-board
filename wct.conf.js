@@ -22,12 +22,12 @@ module.exports = {
         {
           'browserName': 'Chrome',
           'platform': 'Windows 10',
-          'version': '55.0'
+          'version': '60.0'
         },
         {
           'browserName': 'Firefox',
           'platform': 'Windows 10',
-          'version': '50.0'
+          'version': '55.0'
         },
         {
           'browserName': 'safari',
