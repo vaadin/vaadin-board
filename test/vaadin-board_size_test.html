@@ -59,15 +59,6 @@
         var row_default;
         var row_smaller;
         var row_larger;
-        
-        beforeEach(function() {
-          container = fixture('board');
-          board = container.querySelectorAll("vaadin-board");
-          var rows = container.querySelectorAll("vaadin-board-row");
-          row_default = rows[0].querySelector("div");
-          row_smaller = rows[1].querySelector("div");
-          row_larger = rows[2].querySelector("div");
-        });
 
         function testSize(defaultColor, smallerColor, largerColor){
           assert.equal(defaultColor, window.getComputedStyle(row_default).backgroundColor);
@@ -76,6 +67,13 @@
         }
 
         test('Items inside the board-row has different styling, based on row size.', function () {
+          container = fixture('board');
+          board = container.querySelectorAll("vaadin-board");
+          var rows = container.querySelectorAll("vaadin-board-row");
+          row_default = rows[0].querySelector("div");
+          row_smaller = rows[1].querySelector("div");
+          row_larger = rows[2].querySelector("div");
+
           var large = "rgb(255, 0, 0)";
           var medium = "rgb(0, 255, 0)";
           var small = "rgb(0, 0, 255)";
