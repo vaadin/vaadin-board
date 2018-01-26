@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>vaadin-board test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../vaadin-board.html">
+    <link rel="import" href="../vaadin-board-row.html">
+  </head>
+  <body>
+    <test-fixture id="board">
+      <style>
+
+        vaadin-board-row.large > div {
+          background-color: rgb(255, 0, 0);
+        }
+
+        vaadin-board-row.medium > div {
+          background-color: rgb(0, 255, 0);
+        }
+
+        vaadin-board-row.small > div {
+          background-color: rgb(0, 0, 255);
+        }
+      </style>
+      <template>
+        <div id="board">
+          <vaadin-board>
+            <vaadin-board-row id="default">
+              <div>top A</div>
+              <div>top B</div>
+            </vaadin-board-row>
+            <vaadin-board-row id="smaller" small-size="300" medium-size="700">
+              <div>top A</div>
+              <div>top B</div>
+              <div>top C</div>
+              <div>top D</div>
+            </vaadin-board-row>
+            <vaadin-board-row id="larger" small-size="800" medium-size="1300">
+              <div>top A</div>
+              <div>top B</div>
+              <div>top C</div>
+              <div>top D</div>
+            </vaadin-board-row>
+          </vaadin-board>
+        </div>
+      </template>
+    </test-fixture>
+    <script>
+      suite('vaadin-board', function () {
+        var container;
+        var board;
+        var row_default;
+        var row_smaller;
+        var row_larger;
+
+        function testSize(defaultColor, smallerColor, largerColor){
+          assert.equal(defaultColor, window.getComputedStyle(row_default).backgroundColor);
+          assert.equal(smallerColor, window.getComputedStyle(row_smaller).backgroundColor);
+          assert.equal(largerColor, window.getComputedStyle(row_larger).backgroundColor);
+        }
+
+        test('Items inside the board-row has different styling, based on row size.', function () {
+          container = fixture('board');
+          board = container.querySelectorAll("vaadin-board");
+          var rows = container.querySelectorAll("vaadin-board-row");
+          row_default = rows[0].querySelector("div");
+          row_smaller = rows[1].querySelector("div");
+          row_larger = rows[2].querySelector("div");
+
+          var large = "rgb(255, 0, 0)";
+          var medium = "rgb(0, 255, 0)";
+          var small = "rgb(0, 0, 255)";
+          
+          //Default 960 large test
+          container.setAttribute("style","width:980px");
+          board[0].redraw();
+          testSize(large, large, medium);
+          
+          container.setAttribute("style","width:940px");
+          board[0].redraw();
+          testSize(medium, large, medium);
+
+          //Default 600 medium test
+          container.setAttribute("style","width:620px");
+          board[0].redraw();
+          testSize(medium, medium, small);
+
+          container.setAttribute("style","width:580px");
+          board[0].redraw();
+          testSize(small, medium, small);
+
+          // 700 large test
+          container.setAttribute("style","width:720px");
+          board[0].redraw();
+          testSize(medium, large, small);
+
+          container.setAttribute("style","width:680px");
+          board[0].redraw();
+          testSize(medium, medium, small);
+          
+          // 300 medium test
+          container.setAttribute("style","width:320px");
+          board[0].redraw();
+          testSize(small, medium, small);
+
+          container.setAttribute("style","width:280px");
+          board[0].redraw();
+          testSize(small, small, small);
+
+          // 1300 large test
+          container.setAttribute("style","width:1320px");
+          board[0].redraw();
+          testSize(large, large, large);
+
+          container.setAttribute("style","width:1280px");
+          board[0].redraw();
+          testSize(large, large, medium);
+
+          // 800 medium test
+          container.setAttribute("style","width:820px");
+          board[0].redraw();
+          testSize(medium, large, medium);
+
+          container.setAttribute("style","width:780px");
+          board[0].redraw();
+          testSize(medium, large, small);
+        });
+      });
+    </script>
+  </body>
+</html>
