@@ -16,6 +16,20 @@
   <body>
     <test-fixture id="board">
       <style>
+        vaadin-board-row {
+          --vaadin-board-width-small: 500px;
+          --vaadin-board-width-medium: 900px;
+        }
+
+        vaadin-board-row#smaller {
+          --vaadin-board-width-small: 300px;
+          --vaadin-board-width-medium: 700px;
+        }
+
+        vaadin-board-row#larger {
+          --vaadin-board-width-small: 800px;
+          --vaadin-board-width-medium: 1300px;
+        }
 
         vaadin-board-row.large > div {
           background-color: rgb(255, 0, 0);
@@ -33,20 +47,22 @@
         <div id="board">
           <vaadin-board>
             <vaadin-board-row id="default">
-              <div>top A</div>
-              <div>top B</div>
+              <div>default A</div>
+              <div>default B</div>
+              <div>default C</div>
+              <div>default D</div>
             </vaadin-board-row>
-            <vaadin-board-row id="smaller" small-size="300" medium-size="700">
-              <div>top A</div>
-              <div>top B</div>
-              <div>top C</div>
-              <div>top D</div>
+            <vaadin-board-row id="smaller">
+              <div>smaller A</div>
+              <div>smaller B</div>
+              <div>smaller C</div>
+              <div>smaller D</div>
             </vaadin-board-row>
-            <vaadin-board-row id="larger" small-size="800" medium-size="1300">
-              <div>top A</div>
-              <div>top B</div>
-              <div>top C</div>
-              <div>top D</div>
+            <vaadin-board-row id="larger">
+              <div>larger A</div>
+              <div>larger B</div>
+              <div>larger C</div>
+              <div>larger D</div>
             </vaadin-board-row>
           </vaadin-board>
         </div>
@@ -78,21 +94,21 @@
           var medium = "rgb(0, 255, 0)";
           var small = "rgb(0, 0, 255)";
           
-          //Default 960 large test
-          container.setAttribute("style","width:980px");
+          //Default 900 large test
+          container.setAttribute("style","width:920px");
           board[0].redraw();
           testSize(large, large, medium);
           
-          container.setAttribute("style","width:940px");
+          container.setAttribute("style","width:880px");
           board[0].redraw();
           testSize(medium, large, medium);
 
-          //Default 600 medium test
-          container.setAttribute("style","width:620px");
+          //Default 500 medium test
+          container.setAttribute("style","width:520px");
           board[0].redraw();
           testSize(medium, medium, small);
 
-          container.setAttribute("style","width:580px");
+          container.setAttribute("style","width:480px");
           board[0].redraw();
           testSize(small, medium, small);
 

@@ -10,6 +10,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: stretch;
+        --small-size: var(--vaadin-board-width-small, 600px);
+        --medium-size: var(--vaadin-board-width-medium, 960px);
       }
 
        :host ::slotted(*) {
@@ -40,14 +42,6 @@
 
         static get properties() {
           return {
-            smallSize: {
-              type: Number,
-              value: 600
-            },
-            mediumSize: {
-              type: Number,
-              value: 960
-            }
           }
         }
         constructor() {
@@ -84,12 +78,12 @@
         /**
          * Adds styles for board row based on width
          */
-        _addStyleNames(width) {
-          if (width < this.smallSize) {
+        _addStyleNames(width, breakpoints) {
+          if (width < breakpoints.smallSize) {
             this.classList.add(this._SMALL_VIEWPORT_CLASSNAME);
             this.classList.remove(this._MEDIUM_VIEWPORT_CLASSNAME);
             this.classList.remove(this._LARGE_VIEWPORT_CLASSNAME);
-          } else if (width < this.mediumSize) {
+          } else if (width < breakpoints.mediumSize) {
             this.classList.remove(this._SMALL_VIEWPORT_CLASSNAME);
             this.classList.add(this._MEDIUM_VIEWPORT_CLASSNAME);
             this.classList.remove(this._LARGE_VIEWPORT_CLASSNAME);
@@ -105,10 +99,10 @@
          * @param{Number} width of the row in px
          * @param{Number} amount of columns in the row
          */
-        _calculateFlexBasis(colSpan, width, colsInRow) {
-          if (width < this.smallSize) {
+        _calculateFlexBasis(colSpan, width, colsInRow, breakpoints) {
+          if (width < breakpoints.smallSize) {
             colsInRow = 1;
-          } else if (width < this.mediumSize && colsInRow == 4) {
+          } else if (width < breakpoints.mediumSize && colsInRow == 4) {
             colsInRow = 2;
           }
           let flexBasis = colSpan / colsInRow * 100;
@@ -200,11 +194,12 @@
                 || (node instanceof Polymer.DomIf));
             }
             const filteredNodes = nodes.filter(isElementNode);
-            this._addStyleNames(width);
+            const breakpoints = this._measureBreakpointsInPx();
+            this._addStyleNames(width, breakpoints);
             const boardCols = this._parseBoardCols(filteredNodes);
             const colsInRow = boardCols.reduce((a, b) => a + b, 0);
             this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
-              let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow);
+              let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow, breakpoints);
               if (forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
                 this._oldFlexBasis[i] = newFlexBasis
                 e.style.flexBasis = newFlexBasis;
@@ -212,6 +207,25 @@
             });
             this._oldWidth = width;
           }
+        }
+
+        /**
+         * The breakpoints for small and medium can be given in any unit, px, em, in etc.
+         * We need to know them in px so that they are comparable with the actual size
+         *
+         * @return{Object} object with smallSize and mediumSize number properties, which tells
+         * where the row should switch rendering size in pixels.
+         */
+        _measureBreakpointsInPx() {
+            // Convert minWidth to px units for comparison
+            const breakpoints = {};
+            const tmpStyleProp = 'background-position';
+            this.style.setProperty(tmpStyleProp, this.getComputedStyleValue('--small-size'));
+            breakpoints.smallSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
+            this.style.setProperty(tmpStyleProp, this.getComputedStyleValue('--medium-size'));
+            breakpoints.mediumSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
+            this.style.removeProperty(tmpStyleProp);
+            return breakpoints;
         }
       }
       customElements.define(BoardRowElement.is, BoardRowElement);
