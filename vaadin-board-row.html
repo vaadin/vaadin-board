@@ -220,9 +220,19 @@
             // Convert minWidth to px units for comparison
             const breakpoints = {};
             const tmpStyleProp = 'background-position';
-            this.style.setProperty(tmpStyleProp, this.getComputedStyleValue('--small-size'));
+            var smallSize;
+            var mediumSize;
+            this.updateStyles();
+            if (window.ShadyCSS) {
+              smallSize = ShadyCSS.getComputedStyleValue(this, '--small-size');
+              mediumSize = ShadyCSS.getComputedStyleValue(this, '--medium-size');
+            } else {
+              smallSize = getComputedStyle(this).getPropertyValue('--small-size');
+              mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
+            }
+            this.style.setProperty(tmpStyleProp, smallSize);
             breakpoints.smallSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
-            this.style.setProperty(tmpStyleProp, this.getComputedStyleValue('--medium-size'));
+            this.style.setProperty(tmpStyleProp, mediumSize);
             breakpoints.mediumSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
             this.style.removeProperty(tmpStyleProp);
             return breakpoints;
