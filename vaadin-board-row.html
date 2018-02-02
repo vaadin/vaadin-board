@@ -224,8 +224,8 @@
             var mediumSize;
             this.updateStyles();
             if (window.ShadyCSS) {
-              smallSize = ShadyCSS.getComputedStyleValue(this, '--small-size');
-              mediumSize = ShadyCSS.getComputedStyleValue(this, '--medium-size');
+              smallSize = window.ShadyCSS.getComputedStyleValue(this, '--small-size');
+              mediumSize = window.ShadyCSS.getComputedStyleValue(this, '--medium-size');
             } else {
               smallSize = getComputedStyle(this).getPropertyValue('--small-size');
               mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
