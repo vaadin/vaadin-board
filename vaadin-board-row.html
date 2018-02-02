@@ -40,10 +40,6 @@
           return "vaadin-board-row";
         }
 
-        static get properties() {
-          return {
-          }
-        }
         constructor() {
           super();
           this._onIronResize = this._onIronResize.bind(this);
@@ -222,7 +218,6 @@
             const tmpStyleProp = 'background-position';
             var smallSize;
             var mediumSize;
-            this.updateStyles();
             if (window.ShadyCSS) {
               smallSize = window.ShadyCSS.getComputedStyleValue(this, '--small-size');
               mediumSize = window.ShadyCSS.getComputedStyleValue(this, '--medium-size');
