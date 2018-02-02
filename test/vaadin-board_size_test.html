@@ -15,34 +15,36 @@
   </head>
   <body>
     <test-fixture id="board">
-      <style>
-        vaadin-board-row {
-          --vaadin-board-width-small: 500px;
-          --vaadin-board-width-medium: 900px;
-        }
+      <custom-style>
+        <style>
+          vaadin-board-row {
+            --vaadin-board-width-small: 500px;
+            --vaadin-board-width-medium: 900px;
+          }
 
-        vaadin-board-row#smaller {
-          --vaadin-board-width-small: 300px;
-          --vaadin-board-width-medium: 700px;
-        }
+          vaadin-board-row#smaller {
+            --vaadin-board-width-small: 300px;
+            --vaadin-board-width-medium: 700px;
+          }
 
-        vaadin-board-row#larger {
-          --vaadin-board-width-small: 800px;
-          --vaadin-board-width-medium: 1300px;
-        }
+          vaadin-board-row#larger {
+            --vaadin-board-width-small: 800px;
+            --vaadin-board-width-medium: 1300px;
+          }
 
-        vaadin-board-row.large > div {
-          background-color: rgb(255, 0, 0);
-        }
+          vaadin-board-row.large > div {
+            background-color: rgb(255, 0, 0);
+          }
 
-        vaadin-board-row.medium > div {
-          background-color: rgb(0, 255, 0);
-        }
+          vaadin-board-row.medium > div {
+            background-color: rgb(0, 255, 0);
+          }
 
-        vaadin-board-row.small > div {
-          background-color: rgb(0, 0, 255);
-        }
-      </style>
+          vaadin-board-row.small > div {
+            background-color: rgb(0, 0, 255);
+          }
+        </style>
+      </custom-style>
       <template>
         <div id="board">
           <vaadin-board>
