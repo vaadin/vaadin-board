@@ -72,40 +72,35 @@
     </test-fixture>
     <script>
       suite('vaadin-board', function () {
-        var container;
-        var board;
-        var row_default;
-        var row_smaller;
-        var row_larger;
+        const large = "rgb(255, 0, 0)";
+        const medium = "rgb(0, 255, 0)";
+        const small = "rgb(0, 0, 255)";
 
-        function testSize(defaultColor, smallerColor, largerColor){
+        const container = fixture('board');
+        const board = container.querySelectorAll("vaadin-board");
+        const rows = container.querySelectorAll("vaadin-board-row");
+
+        const row_default = rows[0].querySelector("div");
+        const row_smaller = rows[1].querySelector("div");
+        const row_larger = rows[2].querySelector("div");
+
+        function testSize(defaultColor, smallerColor, largerColor) {
           assert.equal(defaultColor, window.getComputedStyle(row_default).backgroundColor);
           assert.equal(smallerColor, window.getComputedStyle(row_smaller).backgroundColor);
           assert.equal(largerColor, window.getComputedStyle(row_larger).backgroundColor);
         }
 
         test('Items inside the board-row has different styling, based on row size.', function () {
-          container = fixture('board');
-          board = container.querySelectorAll("vaadin-board");
-          var rows = container.querySelectorAll("vaadin-board-row");
-          row_default = rows[0].querySelector("div");
-          row_smaller = rows[1].querySelector("div");
-          row_larger = rows[2].querySelector("div");
-
-          var large = "rgb(255, 0, 0)";
-          var medium = "rgb(0, 255, 0)";
-          var small = "rgb(0, 0, 255)";
-          
-          //Default 900 large test
+          // Default 900 large test
           container.setAttribute("style","width:920px");
           board[0].redraw();
           testSize(large, large, medium);
-          
+
           container.setAttribute("style","width:880px");
           board[0].redraw();
           testSize(medium, large, medium);
 
-          //Default 500 medium test
+          // Default 500 medium test
           container.setAttribute("style","width:520px");
           board[0].redraw();
           testSize(medium, medium, small);
@@ -122,7 +117,7 @@
           container.setAttribute("style","width:680px");
           board[0].redraw();
           testSize(medium, medium, small);
-          
+
           // 300 medium test
           container.setAttribute("style","width:320px");
           board[0].redraw();
