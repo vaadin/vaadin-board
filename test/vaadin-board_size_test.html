@@ -72,17 +72,9 @@
     </test-fixture>
     <script>
       suite('vaadin-board', function () {
-        const large = "rgb(255, 0, 0)";
-        const medium = "rgb(0, 255, 0)";
-        const small = "rgb(0, 0, 255)";
-
-        const container = fixture('board');
-        const board = container.querySelectorAll("vaadin-board");
-        const rows = container.querySelectorAll("vaadin-board-row");
-
-        const row_default = rows[0].querySelector("div");
-        const row_smaller = rows[1].querySelector("div");
-        const row_larger = rows[2].querySelector("div");
+        var row_default;
+        var row_smaller;
+        var row_larger;
 
         function testSize(defaultColor, smallerColor, largerColor) {
           assert.equal(defaultColor, window.getComputedStyle(row_default).backgroundColor);
@@ -91,6 +83,18 @@
         }
 
         test('Items inside the board-row has different styling, based on row size.', function () {
+          const large = "rgb(255, 0, 0)";
+          const medium = "rgb(0, 255, 0)";
+          const small = "rgb(0, 0, 255)";
+
+          const container = fixture('board');
+          const board = container.querySelectorAll("vaadin-board");
+          const rows = container.querySelectorAll("vaadin-board-row");
+
+          row_default = rows[0].querySelector("div");
+          row_smaller = rows[1].querySelector("div");
+          row_larger = rows[2].querySelector("div");
+
           // Default 900 large test
           container.setAttribute("style","width:920px");
           board[0].redraw();
