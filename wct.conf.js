@@ -8,7 +8,7 @@ module.exports = {
       'macOS 10.12/ipad@11.2',
       'Windows 10/microsoftedge@16',
       'Windows 10/internet explorer@11',
-      'macOS 10.12/safari@11.0',
+      'macOS 10.13/safari@11.1',
       'Windows 10/firefox@59',
       'Windows 10/chrome@65'
     ];
