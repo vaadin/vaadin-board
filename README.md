@@ -2,9 +2,8 @@
 
 # \<vaadin-board\>
 
-Polymer element to create flexible responsive layouts and build nice looking dashboard.
+A Web component to create flexible responsive layouts and build nice looking dashboard.
 Vaadin Board key feature is how it effectively reorders the widgets on different screen sizes, maximizing the use of space and looking stunning.
-Vaadin Board is using [Polymer 2](https://github.com/polymer/polymer/tree/2.0-preview).
 
 ## License
 
@@ -20,29 +19,30 @@ $ bower install --save vaadin/vaadin-board
 ### Import Vaadin Board
  Add html import
 ```
-<link rel="import" href="bower_components/vaadin/vaadin-board.html">
+<link rel="import" href="bower_components/vaadin-board/vaadin-board.html">
 <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 ```
 ### Use Vaadin Board
  Create your first Vaadin Board
 ```
-<vaadin-board-row>
+<vaadin-board>
+  <vaadin-board-row>
     <div class="top a" board-cols="2">top A</div>
     <div class="top b">top B</div>
     <div class="top c">top C</div>
-</vaadin-board-row>
-<vaadin-board-row>
+  </vaadin-board-row>
+  <vaadin-board-row>
     <div class="mid">mid</div>
-</vaadin-board-row>
-<vaadin-board-row>
+  </vaadin-board-row>
+  <vaadin-board-row>
     <div class="low a">low A</div>
     <vaadin-board-row>
-        <div class="top a">low B / A</div>
-        <div class="top b">low B / B</div>
-        <div class="top c">low B / C</div>
-        <div class="top d">low B / D</div>
+      <div class="top a">low B / A</div>
+      <div class="top b">low B / B</div>
+      <div class="top c">low B / C</div>
+      <div class="top d">low B / D</div>
     </vaadin-board-row>
-    </vaadin-board-row>
+  </vaadin-board-row>
 </vaadin-board>
 ```
 
