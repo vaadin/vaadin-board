@@ -20,9 +20,9 @@ gulp.task('lint:js', function() {
     '*.js',
     'test/*.js'
   ])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('lint:html', function() {
@@ -31,14 +31,14 @@ gulp.task('lint:html', function() {
     'demo/*.html',
     'test/*.html'
   ])
-        .pipe(htmlExtract({
-          sel: 'script, code-example code',
-          strip: true
-        }))
-        .pipe(lec())
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+    .pipe(htmlExtract({
+      sel: 'script, code-example code',
+      strip: true
+    }))
+    .pipe(lec())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('lint:css', function() {
@@ -47,14 +47,14 @@ gulp.task('lint:css', function() {
     'demo/*.html',
     'test/*.html'
   ])
-        .pipe(htmlExtract({
-          sel: 'style'
-        }))
-        .pipe(stylelint({
-          reporters: [
-                {formatter: 'string', console: true}
-          ]
-        }));
+    .pipe(htmlExtract({
+      sel: 'style'
+    }))
+    .pipe(stylelint({
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+    }));
 });
 gulp.task('version:check', function() {
   const expectedVersion = new RegExp('^' + require('./package.json').version + '$');
