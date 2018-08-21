@@ -21,5 +21,10 @@
     "iron-icon": "^2.0.1",
     "vaadin-lumo-styles": "vaadin/vaadin-lumo-styles#^1.1.0-beta1",
     "iron-component-page": "PolymerElements/iron-component-page#^3.0.1"
+  },
+  "resolutions": {
+    "vaadin-element-mixin": "^1.1.0",
+    "vaadin-development-mode-detector": "^1.1.0-beta1",
+    "vaadin-usage-statistics": "^1.1.0-beta1"
   }
 }
