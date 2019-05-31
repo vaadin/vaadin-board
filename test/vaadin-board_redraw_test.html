@@ -104,8 +104,9 @@
           for (let i = 0; i < children.length; i++) {
             var rect = children[i].getBoundingClientRect();
 
-            assert.approximately(rect.left, nestedRowRect.left + expectedLeftOffset[i], 1);
-            assert.approximately(rect.top, nestedRowRect.top + expectedToptOffset[i], 1);
+            // Delta=4 as workaround for https://github.com/vaadin/vaadin-board/issues/121
+            assert.approximately(rect.left, nestedRowRect.left + expectedLeftOffset[i], 4);
+            assert.approximately(rect.top, nestedRowRect.top + expectedToptOffset[i], 4);
           }
         });
 
