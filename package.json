@@ -20,6 +20,11 @@
     "url": "https://github.com/vaadin/vaadin-board/issues"
   },
   "homepage": "https://vaadin.com/components",
+  "files": [
+    "vaadin-*.js",
+    "src",
+    "theme"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
