@@ -53,6 +53,19 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
           return '2.1.0';
         }
 
+        /**
+         * @protected
+         */
+        static _finalizeClass() {
+          super._finalizeClass();
+
+          const devModeCallback = window.Vaadin.developmentModeCallback;
+          const licenseChecker = devModeCallback && devModeCallback['vaadin-license-checker'];
+          if (typeof licenseChecker === 'function') {
+            licenseChecker(BoardElement);
+          }
+        }
+
         constructor() {
           super();
         }
@@ -79,12 +92,6 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
        * @namespace Vaadin
        */
       window.Vaadin.BoardElement = BoardElement;
-
-      const licenseChecker = window.Vaadin.developmentModeCallback
-        && window.Vaadin.developmentModeCallback['vaadin-license-checker'];
-      if (typeof licenseChecker === 'function') {
-        licenseChecker(BoardElement);
-      }
     })();
   </script>
 </dom-module>
