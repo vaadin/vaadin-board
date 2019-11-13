@@ -66,21 +66,13 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
           }
         }
 
-        constructor() {
-          super();
-        }
-
-        connectedCallback() {
-          super.connectedCallback();
-        }
-
         /**
          * Redraws the board and all rows inside it, if necessary.
          *
          * In most cases, board will redraw itself if your reconfigure it. If you dynamically change CSS
          * which affects this element, then you need to call this method.
-         **/
-         redraw() {
+         */
+        redraw() {
           this.notifyResize();
         }
 
