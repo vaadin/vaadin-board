@@ -33,9 +33,6 @@
     "@vaadin/vaadin-license-checker": "^2.1.0",
     "@vaadin/vaadin-element-mixin": "^2.4.1"
   },
-  "scripts": {
-    "generate-typings": "gen-typescript-declarations --outDir . --verify"
-  },
   "devDependencies": {
     "@polymer/app-layout": "^3.0.0",
     "wct-browser-legacy": "^1.0.1",
