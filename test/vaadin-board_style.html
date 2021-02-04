@@ -7,12 +7,12 @@
 
     <title>vaadin-board test</title>
 
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../test-fixture/test-fixture.html">
+    <script src="../../../wct-browser-legacy/browser.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
 
-    <link rel="import" href="../vaadin-board.html">
-    <link rel="import" href="../vaadin-board-row.html">
+    <script type="module" src="../vaadin-board.js"></script>
+    <script type="module" src="../vaadin-board-row.js"></script>
   </head>
   <body>
     <test-fixture id="board">
@@ -50,17 +50,20 @@
         </vaadin-board>
       </template>
     </test-fixture>
-    <script>
-      suite('vaadin-board', function () {
+    <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '../vaadin-board.js';
+import '../vaadin-board-row.js';
+suite('vaadin-board', function () {
 
-        test('Items inside the board-row has different styling, based on row size.', function () {
-          var board = fixture('board');
-          var rows = board.querySelectorAll("vaadin-board-row");
-          assert.equal("rgb(255, 0, 0)", window.getComputedStyle(rows[0].querySelector("div")).backgroundColor);
-          assert.equal("rgb(0, 255, 0)", window.getComputedStyle(rows[1].querySelector("div")).backgroundColor);
-          assert.equal("rgb(0, 0, 255)", window.getComputedStyle(rows[2].querySelector("div")).backgroundColor);
-        });
-      });
-    </script>
+  test('Items inside the board-row has different styling, based on row size.', function () {
+    var board = fixture('board');
+    var rows = board.querySelectorAll("vaadin-board-row");
+    assert.equal("rgb(255, 0, 0)", window.getComputedStyle(rows[0].querySelector("div")).backgroundColor);
+    assert.equal("rgb(0, 255, 0)", window.getComputedStyle(rows[1].querySelector("div")).backgroundColor);
+    assert.equal("rgb(0, 0, 255)", window.getComputedStyle(rows[2].querySelector("div")).backgroundColor);
+  });
+});
+</script>
   </body>
 </html>

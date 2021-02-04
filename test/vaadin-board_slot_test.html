@@ -7,14 +7,14 @@
 
     <title>vaadin-board slot` test</title>
 
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../test-fixture/test-fixture.html">
+    <script src="../../../wct-browser-legacy/browser.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
 
-    <link rel="import" href="../vaadin-board.html">
-    <link rel="import" href="../vaadin-board-row.html">
-    <link rel="import" href="./outer.html">
-    <link rel="import" href="./board-element.html">
+    <script type="module" src="../vaadin-board.js"></script>
+    <script type="module" src="../vaadin-board-row.js"></script>
+    <script type="module" src="./outer.js"></script>
+    <script type="module" src="./board-element.js"></script>
   </head>
   <body>
   <test-fixture id="slot-board-row">
@@ -47,40 +47,45 @@
     </template>
   </test-fixture>
 
-    <script>
-      suite('vaadin-board-with-slotted-element', function (done) {
+    <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '../vaadin-board.js';
+import '../vaadin-board-row.js';
+import './outer.js';
+import './board-element.js';
+import { useShadow } from '@polymer/polymer/lib/utils/settings.js';
+suite('vaadin-board-with-slotted-element', function (done) {
 
-        test('Inner items have 25% flex css.', function () {
+  test('Inner items have 25% flex css.', function () {
 
-          // Test was failing in Chrome because of this bug in Shadydom:
-          // https://github.com/webcomponents/shadydom/issues/168
-          // TODO Remove when the issue is fixed.
-          if (!Polymer.Settings.useShadow) {
-            return;
-          }
-          var boardElement = fixture('slot-board-row');
-          var children = boardElement.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var child = children[i];
+    // Test was failing in Chrome because of this bug in Shadydom:
+    // https://github.com/webcomponents/shadydom/issues/168
+    // TODO Remove when the issue is fixed.
+    if (!useShadow) {
+      return;
+    }
+    var boardElement = fixture('slot-board-row');
+    var children = boardElement.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var child = children[i];
 
-            assert.isAtLeast(child.getAttribute("style").indexOf("flex-basis: 25%"), 0,
-                    "Row children have flex-basis: 25% style");
-          }
-        });
+      assert.isAtLeast(child.getAttribute("style").indexOf("flex-basis: 25%"), 0,
+              "Row children have flex-basis: 25% style");
+    }
+  });
 
-        test('Slot tag inside board child elements, does not effect number of board children.', function () {
+  test('Slot tag inside board child elements, does not effect number of board children.', function () {
 
-          // Test was failing in Chrome because of this bug in Shadydom:
-          // https://github.com/webcomponents/shadydom/issues/168
-          // TODO Remove when the issue is fixed.
-          if (!Polymer.Settings.useShadow) {
-            return;
-          }
-          var boardElement = fixture('slot-board-row-with-slot-child');
-          assert.equal(boardElement.childElementCount, 4, "There are exactly 4 children");
-        });
-      });
-
-    </script>
+    // Test was failing in Chrome because of this bug in Shadydom:
+    // https://github.com/webcomponents/shadydom/issues/168
+    // TODO Remove when the issue is fixed.
+    if (!useShadow) {
+      return;
+    }
+    var boardElement = fixture('slot-board-row-with-slot-child');
+    assert.equal(boardElement.childElementCount, 4, "There are exactly 4 children");
+  });
+});
+</script>
   </body>
 </html>

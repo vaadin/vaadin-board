@@ -7,12 +7,12 @@
 
     <title>vaadin-board test</title>
 
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../test-fixture/test-fixture.html">
+    <script src="../../../wct-browser-legacy/browser.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
 
-    <link rel="import" href="../vaadin-board.html">
-    <link rel="import" href="../vaadin-board-row.html">
+    <script type="module" src="../vaadin-board.js"></script>
+    <script type="module" src="../vaadin-board-row.js"></script>
   </head>
   <body>
     <test-fixture id="desktop-board-row">
@@ -63,75 +63,78 @@
         </vaadin-board-row>
       </template>
     </test-fixture>
-    <script>
-      suite('vaadin-board', function () {
+    <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '../vaadin-board.js';
+import '../vaadin-board-row.js';
+suite('vaadin-board', function () {
 
-        test('Four items take 25% each on Desktop.', function () {
-          var row = fixture('desktop-board-row');
-          var rowRect = row.getBoundingClientRect();
+  test('Four items take 25% each on Desktop.', function () {
+    var row = fixture('desktop-board-row');
+    var rowRect = row.getBoundingClientRect();
 
-          var children = row.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var rect = children[i].getBoundingClientRect();
+    var children = row.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
 
-            assert.approximately(rowRect.top, rect.top, 1, "Row and content top are equal");
-            assert.approximately(rect.left, (i * rowRect.width / 4) + rowRect.left, 1);
-          }
-        });
+      assert.approximately(rowRect.top, rect.top, 1, "Row and content top are equal");
+      assert.approximately(rect.left, (i * rowRect.width / 4) + rowRect.left, 1);
+    }
+  });
 
-        test('Four items take 50% each on Tablet.', function () {
-          var row = fixture('tablet-board-row');
-          var rowRect = row.getBoundingClientRect();
+  test('Four items take 50% each on Tablet.', function () {
+    var row = fixture('tablet-board-row');
+    var rowRect = row.getBoundingClientRect();
 
-          var children = row.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var rect = children[i].getBoundingClientRect();
+    var children = row.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
 
-            assert.approximately(rect.left, (i % 2 * rowRect.width / 2) + rowRect.left, 1);
-            assert.approximately(rect.top, (Math.floor(i / 2) * rowRect.height / 2) + rowRect.top, 1);
-          }
-        });
+      assert.approximately(rect.left, (i % 2 * rowRect.width / 2) + rowRect.left, 1);
+      assert.approximately(rect.top, (Math.floor(i / 2) * rowRect.height / 2) + rowRect.top, 1);
+    }
+  });
 
-        test('Four items take 100% each on Mobile.', function () {
-          var row = fixture('mobile-board-row');
-          var rowRect = row.getBoundingClientRect();
+  test('Four items take 100% each on Mobile.', function () {
+    var row = fixture('mobile-board-row');
+    var rowRect = row.getBoundingClientRect();
 
-          var children = row.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var rect = children[i].getBoundingClientRect();
+    var children = row.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
 
-            assert.approximately(rect.left, rowRect.left, 1);
-            assert.approximately(rect.top, (i * rowRect.height / 4) + rowRect.top, 1);
-          }
-        });
+      assert.approximately(rect.left, rowRect.left, 1);
+      assert.approximately(rect.top, (i * rowRect.height / 4) + rowRect.top, 1);
+    }
+  });
 
-        test('Two items take 50% each on Desktop.', function () {
-          var row = fixture('desktop-board-row-2-items');
-          var rowRect = row.getBoundingClientRect();
+  test('Two items take 50% each on Desktop.', function () {
+    var row = fixture('desktop-board-row-2-items');
+    var rowRect = row.getBoundingClientRect();
 
-          var children = row.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var rect = children[i].getBoundingClientRect();
+    var children = row.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
 
-            assert.equal(rowRect.top, rect.top, "Row and content top are equal");
-            assert.approximately(rect.left, (i * rowRect.width / 2) + rowRect.left, 1);
-          }
-        });
+      assert.equal(rowRect.top, rect.top, "Row and content top are equal");
+      assert.approximately(rect.left, (i * rowRect.width / 2) + rowRect.left, 1);
+    }
+  });
 
-        test('Two items take 50% each on Tablet.', function () {
-          var row = fixture('tablet-board-row-2-items');
-          var rowRect = row.getBoundingClientRect();
+  test('Two items take 50% each on Tablet.', function () {
+    var row = fixture('tablet-board-row-2-items');
+    var rowRect = row.getBoundingClientRect();
 
-          var children = row.querySelectorAll("div");
-          for (let i = 0; i < children.length; i++) {
-            var rect = children[i].getBoundingClientRect();
+    var children = row.querySelectorAll("div");
+    for (let i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
 
-            assert.approximately(rect.left, (i % 2 * rowRect.width / 2) + rowRect.left, 1);
-            assert.approximately(rect.top, (Math.floor(i / 2) * rowRect.height / 2) + rowRect.top, 1);
-          }
-        });
+      assert.approximately(rect.left, (i % 2 * rowRect.width / 2) + rowRect.left, 1);
+      assert.approximately(rect.top, (Math.floor(i / 2) * rowRect.height / 2) + rowRect.top, 1);
+    }
+  });
 
-      });
-    </script>
+});
+</script>
   </body>
 </html>

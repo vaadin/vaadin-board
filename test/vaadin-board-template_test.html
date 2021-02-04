@@ -7,14 +7,14 @@
 
     <title>vaadin-board test</title>
 
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../test-fixture/test-fixture.html">
+    <script src="../../../wct-browser-legacy/browser.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
 
-    <link rel="import" href="../vaadin-board.html">
-    <link rel="import" href="../vaadin-board-row.html">
-    <link rel="import" href="./board-repeat-element.html">
-    <link rel="import" href="./board-if-element.html">
+    <script type="module" src="../vaadin-board.js"></script>
+    <script type="module" src="../vaadin-board-row.js"></script>
+    <script type="module" src="./board-repeat-element.js"></script>
+    <script type="module" src="./board-if-element.js"></script>
   </head>
   <body>
     <test-fixture id="repeat-board-row">
@@ -29,38 +29,43 @@
         </board-if-element>
       </template>
     </test-fixture>
-    <script>
-      suite('vaadin-board-template_test', function () {
+    <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '../vaadin-board.js';
+import '../vaadin-board-row.js';
+import './board-repeat-element.js';
+import './board-if-element.js';
+suite('vaadin-board-template_test', function () {
 
-        let warnMessage = undefined;
-        let oldWarn;
-        setup(function () {
-          oldWarn = console.warn;
-          console.warn = function (message) {
-            warnMessage = message;
-          }
-        });
-        teardown(function () {
-          console.warn = oldWarn;
-        });
+  let warnMessage = undefined;
+  let oldWarn;
+  setup(function () {
+    oldWarn = console.warn;
+    console.warn = function (message) {
+      warnMessage = message;
+    }
+  });
+  teardown(function () {
+    console.warn = oldWarn;
+  });
 
-        test('Dom-repeat is not counted as element of board.', function (done) {
-          fixture('repeat-board-row');
-          setTimeout(function () {
-            assert.isUndefined(warnMessage);
-            done();
-          });
+  test('Dom-repeat is not counted as element of board.', function (done) {
+    fixture('repeat-board-row');
+    setTimeout(function () {
+      assert.isUndefined(warnMessage);
+      done();
+    });
 
-        });
+  });
 
-        test('Dom-If is not counted as element of board.', function (done) {
-          fixture('if-board-row');
-          setTimeout(function () {
-            assert.isUndefined(warnMessage)
-            done();
-          });
-        });
-      });
-    </script>
+  test('Dom-If is not counted as element of board.', function (done) {
+    fixture('if-board-row');
+    setTimeout(function () {
+      assert.isUndefined(warnMessage)
+      done();
+    });
+  });
+});
+</script>
   </body>
 </html>
