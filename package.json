@@ -1,5 +1,10 @@
 {
+  "name": "@vaadin/vaadin-board",
+  "version": "3.0.0",
   "description": "Polymer element to create flexible responsive layouts and build nice looking dashboard.",
+  "main": "vaadin-board.js",
+  "module": "vaadin-board.js",
+  "repository": "vaadin/vaadin-board",
   "keywords": [
     "Vaadin",
     "Board",
@@ -10,30 +15,18 @@
     "web-component",
     "polymer"
   ],
-  "repository": "vaadin/vaadin-board",
-  "homepage": "https://vaadin.com/components",
-  "name": "@vaadin/vaadin-board",
-  "version": "3.0.0",
-  "main": "vaadin-board.js",
   "author": "Vaadin Ltd",
   "license": "https://raw.githubusercontent.com/vaadin/vaadin-board/master/LICENSE.txt",
   "bugs": {
     "url": "https://github.com/vaadin/vaadin-board/issues"
   },
+  "homepage": "https://vaadin.com/components",
   "files": [
     "vaadin-*.d.ts",
     "vaadin-*.js",
     "src",
     "theme"
   ],
-  "resolutions": {
-    "es-abstract": "1.17.6",
-    "@types/doctrine": "0.0.3",
-    "inherits": "2.0.3",
-    "samsam": "1.1.3",
-    "supports-color": "3.1.2",
-    "type-detect": "1.0.0"
-  },
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
     "@polymer/iron-resizable-behavior": "^3.0.0",
