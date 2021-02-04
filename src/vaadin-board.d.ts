@@ -1,12 +1,4 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {IronResizableBehavior} from '@polymer/iron-resizable-behavior/iron-resizable-behavior.js';
-
 import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-
-import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
 
 /**
  * `<vaadin-board>` is a Polymer element to create flexible responsive layouts
@@ -29,7 +21,7 @@ import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
  */
 declare class BoardElement extends
   ElementMixin(
-  PolymerElement) {
+  HTMLElement) {
   static _finalizeClass(): void;
 
   /**

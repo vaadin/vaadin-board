@@ -30,7 +30,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
  * </vaadin-board>
  * ```
  *
- * @extends PolymerElement
+ * @extends HTMLElement
  * @mixes ElementMixin
  */
 class BoardElement extends ElementMixin(mixinBehaviors([IronResizableBehavior], PolymerElement)) {

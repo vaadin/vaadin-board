@@ -1,18 +1,4 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {IronResizableBehavior} from '@polymer/iron-resizable-behavior/iron-resizable-behavior.js';
-
 import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-
-import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-
-import {DomRepeat} from '@polymer/polymer/lib/elements/dom-repeat.js';
-
-import {DomIf} from '@polymer/polymer/lib/elements/dom-if.js';
-
-import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
 
 /**
  * `<vaadin-board-row>` is a Polymer element that together with `vaadin-board` element allows to create flexible responsive layouts and build nice looking dashboard.
@@ -44,10 +30,7 @@ import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
  */
 declare class BoardRowElement extends
   ElementMixin(
-  PolymerElement) {
-  ready(): void;
-  connectedCallback(): void;
-
+  HTMLElement) {
   /**
    * Redraws the row, if necessary.
    *

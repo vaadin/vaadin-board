@@ -40,7 +40,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 * `--vaadin-board-width-small` | Determines the width where mode changes from `small` to `medium` | `600px`
 * `--vaadin-board-width-medium` | Determines the width where mode changes from `medium` to `large` | `960px`
 *
-* @extends PolymerElement
+* @extends HTMLElement
 * @mixes ElementMixin
 */
 class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior], PolymerElement)) {
