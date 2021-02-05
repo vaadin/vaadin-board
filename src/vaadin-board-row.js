@@ -1,8 +1,8 @@
 /**
-@license
-Copyright (c) 2017 - 2020 Vaadin Ltd
-This program is available under Commercial Vaadin Developer License 4.0, available at https://vaadin.com/license/cvdl-4.0.
-*/
+ * @license
+ * Copyright (c) 2017 - 2021 Vaadin Ltd
+ * This program is available under Commercial Vaadin Developer License 4.0, available at https://vaadin.com/license/cvdl-4.0.
+ */
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
