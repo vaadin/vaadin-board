@@ -11,10 +11,10 @@ import '@vaadin/vaadin-license-checker/vaadin-license-checker.js';
 import './vaadin-board-row.js';
 
 /**
- * `<vaadin-board>` is a Polymer element to create flexible responsive layouts
+ * `<vaadin-board>` is a web component to create flexible responsive layouts
  * and build nice looking dashboards.
  *
- * A Vaadin Board is built using `<vaadin-board-row>` elements containing your child elements.
+ * A `<vaadin-board>` is built using `<vaadin-board-row>` elements containing your child elements.
  * Each board row consists of four columns, and can contain up to four elements. Using column spans
  * you can tune the layout to your liking.
  *
