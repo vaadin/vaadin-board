@@ -29,6 +29,7 @@
   ],
   "scripts": {
     "debug": "web-test-runner test/*.test.js --watch",
+    "start": "web-dev-server --node-resolve --open",
     "test": "web-test-runner test/*.test.js --coverage",
     "test:sauce": "TEST_ENV=sauce npm test"
   },
@@ -42,6 +43,7 @@
     "@esm-bundle/chai": "^4.1.5",
     "@open-wc/testing-helpers": "^1.8.12",
     "@polymer/iron-component-page": "^4.0.0",
+    "@web/dev-server": "^0.1.6",
     "@web/test-runner": "^0.12.7",
     "@web/test-runner-saucelabs": "^0.4.1",
     "sinon": "^9.2.1"
