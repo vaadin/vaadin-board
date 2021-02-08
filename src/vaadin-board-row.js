@@ -222,7 +222,8 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
   /**
    * Redraws the row, if necessary.
    *
-   * In most cases, a board row will redraw itself if your reconfigure it. If you dynamically change CSS which affects the row, then you need to call this method.
+   * In most cases, a board row will redraw itself if your reconfigure it.
+   * If you dynamically change CSS which affects the row, then you need to call this method.
    */
   redraw() {
     this._recalculateFlexBasis(true);

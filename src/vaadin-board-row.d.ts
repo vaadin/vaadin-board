@@ -38,7 +38,8 @@ declare class BoardRowElement extends ElementMixin(HTMLElement) {
   /**
    * Redraws the row, if necessary.
    *
-   * In most cases, a board row will redraw itself if your reconfigure it. If you dynamically change CSS which affects the row, then you need to call this method.
+   * In most cases, a board row will redraw itself if your reconfigure it.
+   * If you dynamically change CSS which affects the row, then you need to call this method.
    */
   redraw(): void;
 }
