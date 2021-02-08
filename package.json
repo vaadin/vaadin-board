@@ -42,6 +42,17 @@
     "test": "web-test-runner test/*.test.js --coverage",
     "test:sauce": "TEST_ENV=sauce npm test"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
     "@polymer/iron-resizable-behavior": "^3.0.0",
