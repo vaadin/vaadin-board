@@ -12,72 +12,72 @@ import { IronResizableBehavior } from '@polymer/iron-resizable-behavior/iron-res
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
 /**
-* `<vaadin-board-row>` is a Polymer element that together with `vaadin-board` element allows to create flexible responsive layouts and build nice looking dashboard.
-*
-* Each row can contain up to four elements (fewer if colspan is used) and is automatically responsive. The row changes between `large`, `medium` and `small` modes depending on the available width and the set breakpoints. In `large` mode, typically all content is shown side-by-side, in `medium` half of the content is side by side and in `small` mode, content is laid out vertically.
-*
-* The breakpoints can be set using custom CSS properties. By default the breakpoints are `small: <600px`, `medium: < 960px`, `large >= 960px`.
-*
-*
-* ```html
-* <vaadin-board>
-*   <vaadin-board-row>
-*     <div>This could be chart 1</div>
-*     <div>This could be chart 2</div>
-*     <div>This could be chart 3</div>
-*     <div>This could be chart 4</div>
-*   </vaadin-board-row>
-* </vaadin-board>
-* ```
-*
-* ### Styling
-*
-* The following custom properties are available for styling:
-*
-* Custom property | Description | Default
-* ----------------|-------------|-------------
-* `--vaadin-board-width-small` | Determines the width where mode changes from `small` to `medium` | `600px`
-* `--vaadin-board-width-medium` | Determines the width where mode changes from `medium` to `large` | `960px`
-*
-* @extends HTMLElement
-* @mixes ElementMixin
-*/
+ * `<vaadin-board-row>` is a Polymer element that together with `vaadin-board` element allows to create flexible responsive layouts and build nice looking dashboard.
+ *
+ * Each row can contain up to four elements (fewer if colspan is used) and is automatically responsive. The row changes between `large`, `medium` and `small` modes depending on the available width and the set breakpoints. In `large` mode, typically all content is shown side-by-side, in `medium` half of the content is side by side and in `small` mode, content is laid out vertically.
+ *
+ * The breakpoints can be set using custom CSS properties. By default the breakpoints are `small: <600px`, `medium: < 960px`, `large >= 960px`.
+ *
+ *
+ * ```html
+ * <vaadin-board>
+ *   <vaadin-board-row>
+ *     <div>This could be chart 1</div>
+ *     <div>This could be chart 2</div>
+ *     <div>This could be chart 3</div>
+ *     <div>This could be chart 4</div>
+ *   </vaadin-board-row>
+ * </vaadin-board>
+ * ```
+ *
+ * ### Styling
+ *
+ * The following custom properties are available for styling:
+ *
+ * Custom property | Description | Default
+ * ----------------|-------------|-------------
+ * `--vaadin-board-width-small` | Determines the width where mode changes from `small` to `medium` | `600px`
+ * `--vaadin-board-width-medium` | Determines the width where mode changes from `medium` to `large` | `960px`
+ *
+ * @extends HTMLElement
+ * @mixes ElementMixin
+ */
 class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior], PolymerElement)) {
   static get template() {
     return html`
-    <style>
-       :host {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: stretch;
-        --small-size: var(--vaadin-board-width-small, 600px);
-        --medium-size: var(--vaadin-board-width-medium, 960px);
-      }
+      <style>
+        :host {
+          display: flex;
+          flex-flow: row wrap;
+          align-items: stretch;
+          --small-size: var(--vaadin-board-width-small, 600px);
+          --medium-size: var(--vaadin-board-width-medium, 960px);
+        }
 
-       :host ::slotted(*) {
-        box-sizing: border-box;
-        flex-grow: 1;
-        overflow: hidden;
-      }
-    </style>
-    <slot id="insertionPoint"></slot>
-`;
+        :host ::slotted(*) {
+          box-sizing: border-box;
+          flex-grow: 1;
+          overflow: hidden;
+        }
+      </style>
+      <slot id="insertionPoint"></slot>
+    `;
   }
 
   static get is() {
-    return "vaadin-board-row";
+    return 'vaadin-board-row';
   }
 
   constructor() {
     super();
     this._onIronResize = this._onIronResize.bind(this);
 
-    this._SMALL_VIEWPORT_CLASSNAME = "small";
-    this._MEDIUM_VIEWPORT_CLASSNAME = "medium";
-    this._LARGE_VIEWPORT_CLASSNAME = "large";
+    this._SMALL_VIEWPORT_CLASSNAME = 'small';
+    this._MEDIUM_VIEWPORT_CLASSNAME = 'medium';
+    this._LARGE_VIEWPORT_CLASSNAME = 'large';
 
     this._oldWidth = 0;
-    this._oldBreakpoints = {'smallSize': 600, 'mediumSize': 960};
+    this._oldBreakpoints = { smallSize: 600, mediumSize: 960 };
     this._oldFlexBasis = [];
   }
 
@@ -88,13 +88,15 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
     this.$.insertionPoint.addEventListener('slotchange', this.redraw.bind(this));
     afterNextRender(this, function () {
       //force this as an interested resizable of parent
-      this.dispatchEvent(new CustomEvent('iron-request-resize-notifications', {
-        node: this,
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-        detail: {}
-      }));
+      this.dispatchEvent(
+        new CustomEvent('iron-request-resize-notifications', {
+          node: this,
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: {}
+        })
+      );
     });
   }
 
@@ -139,15 +141,15 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
     } else if (width < breakpoints.mediumSize && colsInRow == 4) {
       colsInRow = 2;
     }
-    let flexBasis = colSpan / colsInRow * 100;
+    let flexBasis = (colSpan / colsInRow) * 100;
     flexBasis = flexBasis > 100 ? 100 : flexBasis;
     return flexBasis + '%';
   }
 
   /** @private */
   _reportError() {
-    const errorMessage = "The column configuration is not valid; column count should add up to 3 or 4.";
-    console.warn(errorMessage, "check: \r\n" + this.outerHTML);
+    const errorMessage = 'The column configuration is not valid; column count should add up to 3 or 4.';
+    console.warn(errorMessage, 'check: \r\n' + this.outerHTML);
   }
 
   /**
@@ -158,9 +160,9 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
    * @private
    */
   _parseBoardCols(nodes) {
-    const boardCols = nodes.map(node => {
-      if (node.getAttribute("board-cols")) {
-        return parseInt(node.getAttribute("board-cols"));
+    const boardCols = nodes.map((node) => {
+      if (node.getAttribute('board-cols')) {
+        return parseInt(node.getAttribute('board-cols'));
       }
       return 1;
     });
@@ -176,8 +178,7 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
       boardCols.forEach((node, i) => {
         returnBoardCols[i] = 1;
       });
-    }
-    else {
+    } else {
       returnBoardCols = boardCols.slice(0);
     }
 
@@ -204,8 +205,7 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
           this._reportError();
         }
         this.removeChild(node);
-      }
-      else {
+      } else {
         returnNodes[i] = node;
       }
     });
@@ -230,15 +230,16 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
   _recalculateFlexBasis(forceResize) {
     const width = this.getBoundingClientRect().width;
     const breakpoints = this._measureBreakpointsInPx();
-    if (forceResize || width != this._oldWidth
-        || breakpoints.smallSize != this._oldBreakpoints.smallSize
-        || breakpoints.mediumSize != this._oldBreakpoints.mediumSize) {
+    if (
+      forceResize ||
+      width != this._oldWidth ||
+      breakpoints.smallSize != this._oldBreakpoints.smallSize ||
+      breakpoints.mediumSize != this._oldBreakpoints.mediumSize
+    ) {
       const nodes = this.$.insertionPoint.assignedNodes({ flatten: true });
       const isElementNode = function (node) {
-        return !((node.nodeType === node.TEXT_NODE)
-          || (node instanceof DomRepeat)
-          || (node instanceof DomIf));
-      }
+        return !(node.nodeType === node.TEXT_NODE || node instanceof DomRepeat || node instanceof DomIf);
+      };
       const filteredNodes = nodes.filter(isElementNode);
       this._addStyleNames(width, breakpoints);
       const boardCols = this._parseBoardCols(filteredNodes);
@@ -246,7 +247,7 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
       this._removeExtraNodesFromDOM(boardCols, filteredNodes).forEach((e, i) => {
         let newFlexBasis = this._calculateFlexBasis(boardCols[i], width, colsInRow, breakpoints);
         if (forceResize || !this._oldFlexBasis[i] || this._oldFlexBasis[i] != newFlexBasis) {
-          this._oldFlexBasis[i] = newFlexBasis
+          this._oldFlexBasis[i] = newFlexBasis;
           e.style.flexBasis = newFlexBasis;
         }
       });
@@ -266,17 +267,17 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
    * @private
    */
   _measureBreakpointsInPx() {
-      // Convert minWidth to px units for comparison
-      const breakpoints = {};
-      const tmpStyleProp = 'background-position';
-      const smallSize = getComputedStyle(this).getPropertyValue('--small-size');
-      const mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
-      this.style.setProperty(tmpStyleProp, smallSize);
-      breakpoints.smallSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
-      this.style.setProperty(tmpStyleProp, mediumSize);
-      breakpoints.mediumSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
-      this.style.removeProperty(tmpStyleProp);
-      return breakpoints;
+    // Convert minWidth to px units for comparison
+    const breakpoints = {};
+    const tmpStyleProp = 'background-position';
+    const smallSize = getComputedStyle(this).getPropertyValue('--small-size');
+    const mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
+    this.style.setProperty(tmpStyleProp, smallSize);
+    breakpoints.smallSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
+    this.style.setProperty(tmpStyleProp, mediumSize);
+    breakpoints.mediumSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
+    this.style.removeProperty(tmpStyleProp);
+    return breakpoints;
   }
 }
 

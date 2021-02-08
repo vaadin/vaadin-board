@@ -1,4 +1,4 @@
-import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
+import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
 /**
  * `<vaadin-board-row>` is a Polymer element that together with `vaadin-board` element allows to create flexible responsive layouts and build nice looking dashboard.
@@ -28,9 +28,7 @@ import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js
  * `--vaadin-board-width-small` | Determines the width where mode changes from `small` to `medium` | `600px`
  * `--vaadin-board-width-medium` | Determines the width where mode changes from `medium` to `large` | `960px`
  */
-declare class BoardRowElement extends
-  ElementMixin(
-  HTMLElement) {
+declare class BoardRowElement extends ElementMixin(HTMLElement) {
   /**
    * Redraws the row, if necessary.
    *
@@ -40,10 +38,9 @@ declare class BoardRowElement extends
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-board-row": BoardRowElement;
+    'vaadin-board-row': BoardRowElement;
   }
 }
 
-export {BoardRowElement};
+export { BoardRowElement };

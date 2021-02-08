@@ -35,13 +35,13 @@ import './vaadin-board-row.js';
 class BoardElement extends ElementMixin(mixinBehaviors([IronResizableBehavior], PolymerElement)) {
   static get template() {
     return html`
-    <style>
-       :host {
-        display: block;
-      }
-    </style>
-    <slot></slot>
-`;
+      <style>
+        :host {
+          display: block;
+        }
+      </style>
+      <slot></slot>
+    `;
   }
 
   static get is() {

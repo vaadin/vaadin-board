@@ -1,4 +1,4 @@
-import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
+import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
 /**
  * `<vaadin-board>` is a Polymer element to create flexible responsive layouts
@@ -19,9 +19,7 @@ import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js
  * </vaadin-board>
  * ```
  */
-declare class BoardElement extends
-  ElementMixin(
-  HTMLElement) {
+declare class BoardElement extends ElementMixin(HTMLElement) {
   static _finalizeClass(): void;
 
   /**
@@ -34,10 +32,9 @@ declare class BoardElement extends
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-board": BoardElement;
+    'vaadin-board': BoardElement;
   }
 }
 
-export {BoardElement};
+export { BoardElement };

@@ -98,14 +98,14 @@ describe('redraw', () => {
 
     it('should have the same size after changing from 1200px to 900px and back', () => {
       const rowRect = row.getBoundingClientRect();
-      const expectedLeftOffset = [0, Math.floor(1 / 2 * rowRect.width), 0, Math.floor(1 / 2 *rowRect.width)];
+      const expectedLeftOffset = [0, Math.floor((1 / 2) * rowRect.width), 0, Math.floor((1 / 2) * rowRect.width)];
 
       board.style.width = '900px';
       board.redraw();
       board.style.width = '1200px';
       board.redraw();
 
-      const expectedTopOffset = [0, 0, Math.floor(1 / 2 * rowRect.height), Math.floor(1 / 2 * rowRect.height)];
+      const expectedTopOffset = [0, 0, Math.floor((1 / 2) * rowRect.height), Math.floor((1 / 2) * rowRect.height)];
 
       for (let i = 0; i < row.children.length; i++) {
         const rect = row.children[i].getBoundingClientRect();
