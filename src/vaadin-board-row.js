@@ -269,15 +269,8 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
       // Convert minWidth to px units for comparison
       const breakpoints = {};
       const tmpStyleProp = 'background-position';
-      var smallSize;
-      var mediumSize;
-      if (window.ShadyCSS) {
-        smallSize = window.ShadyCSS.getComputedStyleValue(this, '--small-size');
-        mediumSize = window.ShadyCSS.getComputedStyleValue(this, '--medium-size');
-      } else {
-        smallSize = getComputedStyle(this).getPropertyValue('--small-size');
-        mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
-      }
+      const smallSize = getComputedStyle(this).getPropertyValue('--small-size');
+      const mediumSize = getComputedStyle(this).getPropertyValue('--medium-size');
       this.style.setProperty(tmpStyleProp, smallSize);
       breakpoints.smallSize = parseFloat(getComputedStyle(this).getPropertyValue(tmpStyleProp));
       this.style.setProperty(tmpStyleProp, mediumSize);
