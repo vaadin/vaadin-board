@@ -11,6 +11,12 @@ import { DomIf } from '@polymer/polymer/lib/elements/dom-if.js';
 import { IronResizableBehavior } from '@polymer/iron-resizable-behavior/iron-resizable-behavior.js';
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
+const CLASSES = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large'
+};
+
 /**
  * `<vaadin-board-row>` is a Polymer element that together with `vaadin-board` element allows to create flexible responsive layouts and build nice looking dashboard.
  *
@@ -71,11 +77,6 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
   constructor() {
     super();
     this._onIronResize = this._onIronResize.bind(this);
-
-    this._SMALL_VIEWPORT_CLASSNAME = 'small';
-    this._MEDIUM_VIEWPORT_CLASSNAME = 'medium';
-    this._LARGE_VIEWPORT_CLASSNAME = 'large';
-
     this._oldWidth = 0;
     this._oldBreakpoints = { smallSize: 600, mediumSize: 960 };
     this._oldFlexBasis = [];
@@ -112,17 +113,17 @@ class BoardRowElement extends ElementMixin(mixinBehaviors([IronResizableBehavior
    */
   _addStyleNames(width, breakpoints) {
     if (width < breakpoints.smallSize) {
-      this.classList.add(this._SMALL_VIEWPORT_CLASSNAME);
-      this.classList.remove(this._MEDIUM_VIEWPORT_CLASSNAME);
-      this.classList.remove(this._LARGE_VIEWPORT_CLASSNAME);
+      this.classList.add(CLASSES.SMALL);
+      this.classList.remove(CLASSES.MEDIUM);
+      this.classList.remove(CLASSES.LARGE);
     } else if (width < breakpoints.mediumSize) {
-      this.classList.remove(this._SMALL_VIEWPORT_CLASSNAME);
-      this.classList.add(this._MEDIUM_VIEWPORT_CLASSNAME);
-      this.classList.remove(this._LARGE_VIEWPORT_CLASSNAME);
+      this.classList.remove(CLASSES.SMALL);
+      this.classList.add(CLASSES.MEDIUM);
+      this.classList.remove(CLASSES.LARGE);
     } else {
-      this.classList.remove(this._SMALL_VIEWPORT_CLASSNAME);
-      this.classList.remove(this._MEDIUM_VIEWPORT_CLASSNAME);
-      this.classList.add(this._LARGE_VIEWPORT_CLASSNAME);
+      this.classList.remove(CLASSES.SMALL);
+      this.classList.remove(CLASSES.MEDIUM);
+      this.classList.add(CLASSES.LARGE);
     }
   }
 
