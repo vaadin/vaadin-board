@@ -28,7 +28,7 @@ const CLASSES = {
  * In `large` mode, typically all content is shown side-by-side, in `medium` half of the content is
  * side by side and in `small` mode, content is laid out vertically.
  *
- * The breakpoints can be set using custom CSS properties. 
+ * The breakpoints can be set using custom CSS properties.
  * By default the breakpoints are `small: <600px`, `medium: < 960px`, `large >= 960px`.
  *
  * ```html
