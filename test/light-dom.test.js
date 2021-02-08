@@ -8,7 +8,7 @@ describe('light DOM children', () => {
   describe('adding', () => {
     beforeEach(() => {
       row = fixtureSync(`
-        <vaadin-board-row style="width:1200px;">
+        <vaadin-board-row style="width: 1200px;">
           <div id="first">top B</div>
           <div>top C</div>
           <div>top D</div>
@@ -34,7 +34,7 @@ describe('light DOM children', () => {
   describe('removing', () => {
     beforeEach(() => {
       row = fixtureSync(`
-        <vaadin-board-row style="width:1200px;">
+        <vaadin-board-row style="width: 1200px;">
           <div id="first">top A</div>
           <div>top B</div>
           <div>top C</div>
