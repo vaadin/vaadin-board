@@ -1,27 +1,21 @@
-[![npm version](https://badgen.net/npm/v/@vaadin/vaadin-board)](https://www.npmjs.com/package/@vaadin/vaadin-board)
-[![Bower version](https://badgen.net/github/release/vaadin/vaadin-board)](https://github.com/vaadin/vaadin-board/releases)
-[![Build Status](https://travis-ci.org/vaadin/vaadin-board.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-board)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/web-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
- [![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/vaadinvaadin-board)
-[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/vaadinvaadin-board.svg)](https://vaadin.com/directory/component/vaadinvaadin-board)
-
-
 # \<vaadin-board\>
 
-> ⚠️ 　Starting from Vaadin 20, this project has migrated to [`vaadin-web-components`](https://github.com/vaadin/vaadin-web-components/tree/master/packages/vaadin-board) *monorepository*.
->
-> This repository is used for Vaadin 14 LTS and Vaadin 19.
+> ⚠️ Starting from Vaadin 20, the source code and issues for this component are migrated to the [`vaadin/web-components`](https://github.com/vaadin/web-components/tree/master/packages/vaadin-board) monorepository.
+> This repository contains the source code and releases of `<vaadin-board>` for the Vaadin versions 10 to 19.
 
----
+[&lt;vaadin-board&gt;](https://vaadin.com/components/vaadin-board) is a Web component to create flexible responsive layouts and build nice looking dashboard.
+Vaadin Board key feature is how it effectively reorders the widgets on different screen sizes, maximizing the use of space and looking stunning.
 
 [Live Demo ↗](https://vaadin.com/components/vaadin-board/html-examples)
 |
 [API documentation ↗](https://vaadin.com/components/vaadin-board/html-api)
 
-
-[&lt;vaadin-board&gt;](https://vaadin.com/components/vaadin-board) is a Web component to create flexible responsive layouts and build nice looking dashboard.
-Vaadin Board key feature is how it effectively reorders the widgets on different screen sizes, maximizing the use of space and looking stunning.
+[![npm version](https://badgen.net/npm/v/@vaadin/vaadin-board)](https://www.npmjs.com/package/@vaadin/vaadin-board)
+[![Bower version](https://badgen.net/github/release/vaadin/vaadin-board)](https://github.com/vaadin/vaadin-board/releases)
+[![Build Status](https://travis-ci.org/vaadin/vaadin-board.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-board)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/web-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/vaadinvaadin-board)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/vaadinvaadin-board.svg)](https://vaadin.com/directory/component/vaadinvaadin-board)
 
 ```html
 <vaadin-board>
