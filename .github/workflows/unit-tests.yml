@@ -1,11 +1,11 @@
-name: Full QA
+name: Unit Tests
 
 # all pull requests
 on: pull_request
 
 jobs:
   unit-tests-p2:
-    name: Unit Tests / Polymer 2 on the CI agent
+    name: Polymer 2 on the CI agent
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node 12.x
@@ -39,7 +39,7 @@ jobs:
         run: "xvfb-run -s '-screen 0 1024x768x24' wct"
 
   unit-tests-p3:
-    name: Unit Tests / Polymer 3 on SauceLabs
+    name: Polymer 3 on SauceLabs
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node 12.x
