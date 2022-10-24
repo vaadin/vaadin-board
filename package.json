@@ -16,6 +16,7 @@
   ],
   "author": "Vaadin Ltd",
   "license": "https://raw.githubusercontent.com/vaadin/vaadin-board/master/LICENSE.txt",
+  "cvdlName": "vaadin-board",
   "bugs": {
     "url": "https://github.com/vaadin/vaadin-board/issues"
   },
