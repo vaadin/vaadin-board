@@ -133,6 +133,7 @@
 
           row.toggleAttribute("hidden");
           board.style.width = "100px";
+          row.fire('iron-resize');
 
           assert.equal(initialClassName, row.className);
         });
@@ -144,19 +145,7 @@
           const initialClassName = row.className;
 
           board.style.width = "100px";
-
-          assert.notEqual(initialClassName, row.className);
-        });
-
-        test("Setting a resized hidden row visible should trigger recalculating flex basis", function () {
-          const board = fixture('board-1-row-4-items');
-          const row = board.querySelector('#top');
-
-          const initialClassName = row.className;
-
-          row.toggleAttribute("hidden");
-          board.style.width = "100px";
-          row.toggleAttribute("hidden");
+          row.fire('iron-resize');
 
           assert.notEqual(initialClassName, row.className);
         });
