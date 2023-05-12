@@ -228,9 +228,13 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
         _recalculateFlexBasis(forceResize) {
           const width = this.getBoundingClientRect().width;
           const breakpoints = this._measureBreakpointsInPx();
-          if (forceResize || width != this._oldWidth
-              || breakpoints.smallSize != this._oldBreakpoints.smallSize
-              || breakpoints.mediumSize != this._oldBreakpoints.mediumSize) {
+          const shouldRecalculate =
+            forceResize ||
+            (this.offsetParent !== null &&
+              (width != this._oldWidth ||
+                breakpoints.smallSize != this._oldBreakpoints.smallSize ||
+                breakpoints.mediumSize != this._oldBreakpoints.mediumSize));
+          if (shouldRecalculate) {
             const nodes = this.$.insertionPoint.assignedNodes({ flatten: true });
             const isElementNode = function (node) {
               return !((node.nodeType === node.TEXT_NODE)

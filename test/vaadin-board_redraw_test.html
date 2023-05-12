@@ -124,6 +124,33 @@
             assert.approximately(rect.top, (Math.floor(i / 2) * rowRect.height / 2) + rowRect.top, 1);
           }
         });
+
+        test("Resize event should not trigger recalculating flex basis for a hidden row ", function () {
+          const row = fixture("board-row-4-items");
+
+          row.style.width = "700px";
+          row.redraw();
+
+          const initialFlexBasis = row.style.flexBasis;
+
+          row.toggleAttribute("hidden");
+          row.style.width = "100px";
+
+          assert.equal(initialFlexBasis, row.style.flexBasis);
+        });
+
+        test("Resize event should trigger recalculating flex basis for a visible row ", function () {
+          const row = fixture("board-row-4-items");
+
+          row.style.width = "700px";
+          row.redraw();
+
+          const initialFlexBasis = row.style.flexBasis;
+
+          row.style.width = "100px";
+
+          assert.notEqual(initialFlexBasis, row.style.flexBasis);
+        });
       });
     </script>
   </body>
