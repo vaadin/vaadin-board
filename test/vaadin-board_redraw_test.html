@@ -125,7 +125,7 @@
           }
         });
 
-        test("Resize event should not trigger recalculating flex basis for a hidden row ", function () {
+        test("Resize event should not trigger recalculating flex basis for a hidden row", function () {
           const board = fixture('board-1-row-4-items');
           const row = board.querySelector('#top');
 
@@ -137,13 +137,26 @@
           assert.equal(initialClassName, row.className);
         });
 
-        test("Resize event should trigger recalculating flex basis for a visible row ", function () {
+        test("Resize event should trigger recalculating flex basis for a visible row", function () {
           const board = fixture('board-1-row-4-items');
           const row = board.querySelector('#top');
 
           const initialClassName = row.className;
 
           board.style.width = "100px";
+
+          assert.notEqual(initialClassName, row.className);
+        });
+
+        test("Setting a resized hidden row visible should trigger recalculating flex basis", function () {
+          const board = fixture('board-1-row-4-items');
+          const row = board.querySelector('#top');
+
+          const initialClassName = row.className;
+
+          row.toggleAttribute("hidden");
+          board.style.width = "100px";
+          row.toggleAttribute("hidden");
 
           assert.notEqual(initialClassName, row.className);
         });
