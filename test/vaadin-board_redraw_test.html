@@ -131,7 +131,7 @@
 
           const initialClassName = row.className;
 
-          row.toggleAttribute("hidden");
+          row.style.display = 'none';
           row.style.width = "100px";
           row.fire('resize');
 
