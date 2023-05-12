@@ -133,7 +133,6 @@
 
           row.toggleAttribute("hidden");
           board.style.width = "100px";
-          board.redraw();
 
           assert.equal(initialClassName, row.className);
         });
@@ -145,7 +144,6 @@
           const initialClassName = row.className;
 
           board.style.width = "100px";
-          board.redraw();
 
           assert.notEqual(initialClassName, row.className);
         });
