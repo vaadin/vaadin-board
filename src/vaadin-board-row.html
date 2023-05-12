@@ -228,13 +228,7 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
         _recalculateFlexBasis(forceResize) {
           const width = this.getBoundingClientRect().width;
           const breakpoints = this._measureBreakpointsInPx();
-          const shouldRecalculate =
-            forceResize ||
-            (this.offsetParent !== null &&
-              (width != this._oldWidth ||
-                breakpoints.smallSize != this._oldBreakpoints.smallSize ||
-                breakpoints.mediumSize != this._oldBreakpoints.mediumSize));
-          if (shouldRecalculate) {
+          if (forceResize || this._shouldRecalculate(width, breakpoints)) {
             const nodes = this.$.insertionPoint.assignedNodes({ flatten: true });
             const isElementNode = function (node) {
               return !((node.nodeType === node.TEXT_NODE)
@@ -255,6 +249,19 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
             this._oldWidth = width;
             this._oldBreakpoints = breakpoints;
           }
+        }
+
+        /** @private */
+        _shouldRecalculate(width, breakpoints) {
+          // Should not recalculate if row is invisible
+          if (this.offsetParent === null) {
+            return false;
+          }
+          return (
+            width !== this._oldWidth ||
+            breakpoints.smallSize !== this._oldBreakpoints.smallSize ||
+            breakpoints.mediumSize !== this._oldBreakpoints.mediumSize
+          );
         }
 
         /**
