@@ -126,28 +126,26 @@
         });
 
         test("Resize event should not trigger recalculating flex basis for a hidden row ", function () {
-          const row = fixture("board-row-4-items");
-
-          row.style.width = "700px";
-          row.redraw();
+          const board = fixture('board-1-row-4-items');
+          const row = board.querySelector('#top');
 
           const initialClassName = row.className;
 
           row.toggleAttribute("hidden");
-          row.style.width = "100px";
+          board.style.width = "100px";
+          board.redraw();
 
           assert.equal(initialClassName, row.className);
         });
 
         test("Resize event should trigger recalculating flex basis for a visible row ", function () {
-          const row = fixture("board-row-4-items");
-
-          row.style.width = "700px";
-          row.redraw();
+          const board = fixture('board-1-row-4-items');
+          const row = board.querySelector('#top');
 
           const initialClassName = row.className;
 
-          row.style.width = "100px";
+          board.style.width = "100px";
+          board.redraw();
 
           assert.notEqual(initialClassName, row.className);
         });
