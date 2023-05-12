@@ -132,8 +132,8 @@
           const initialClassName = row.className;
 
           row.toggleAttribute("hidden");
-          board.style.width = "100px";
-          row.fire('iron-resize');
+          row.style.width = "100px";
+          row.fire('resize');
 
           assert.equal(initialClassName, row.className);
         });
@@ -144,8 +144,8 @@
 
           const initialClassName = row.className;
 
-          board.style.width = "100px";
-          row.fire('iron-resize');
+          row.style.width = "100px";
+          row.fire('resize');
 
           assert.notEqual(initialClassName, row.className);
         });
