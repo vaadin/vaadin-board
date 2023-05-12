@@ -131,12 +131,12 @@
           row.style.width = "700px";
           row.redraw();
 
-          const initialFlexBasis = row.style.flexBasis;
+          const initialClassName = row.className;
 
           row.toggleAttribute("hidden");
           row.style.width = "100px";
 
-          assert.equal(initialFlexBasis, row.style.flexBasis);
+          assert.equal(initialClassName, row.className);
         });
 
         test("Resize event should trigger recalculating flex basis for a visible row ", function () {
@@ -145,11 +145,11 @@
           row.style.width = "700px";
           row.redraw();
 
-          const initialFlexBasis = row.style.flexBasis;
+          const initialClassName = row.className;
 
           row.style.width = "100px";
 
-          assert.notEqual(initialFlexBasis, row.style.flexBasis);
+          assert.notEqual(initialClassName, row.className);
         });
       });
     </script>
