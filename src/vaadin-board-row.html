@@ -254,7 +254,7 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
         /** @private */
         _shouldRecalculate(width, breakpoints) {
           // Should not recalculate if row is invisible
-          if (_isElementHidden()) {
+          if (this._isElementHidden()) {
             return false;
           }
           return (
