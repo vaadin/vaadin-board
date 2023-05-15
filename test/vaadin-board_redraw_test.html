@@ -125,27 +125,40 @@
           }
         });
 
-        test("Resize event should not trigger recalculating flex basis for a hidden row", function () {
-          const board = fixture('board-1-row-4-items');
-          const row = board.querySelector('#top');
+        test("Resize event should not trigger recalculating flex basis for a directly hidden row", function () {
+          const board = fixture("board-1-row-4-items");
+          const row = board.querySelector("#top");
 
           const initialClassName = row.className;
 
-          row.style.display = 'none';
+          row.style.display = "none";
           row.style.width = "100px";
-          row.fire('resize');
+          row.fire("resize");
+
+          assert.equal(initialClassName, row.className);
+        });
+
+        test("Resize event should not trigger recalculating flex basis for a row hidden through an ancestor", function () {
+          const board = fixture("board-1-row-4-items");
+          const row = board.querySelector("#top");
+
+          const initialClassName = row.className;
+
+          board.style.display = "none";
+          row.style.width = "100px";
+          row.fire("resize");
 
           assert.equal(initialClassName, row.className);
         });
 
         test("Resize event should trigger recalculating flex basis for a visible row", function () {
-          const board = fixture('board-1-row-4-items');
-          const row = board.querySelector('#top');
+          const board = fixture("board-1-row-4-items");
+          const row = board.querySelector("#top");
 
           const initialClassName = row.className;
 
           row.style.width = "100px";
-          row.fire('resize');
+          row.fire("resize");
 
           assert.notEqual(initialClassName, row.className);
         });
