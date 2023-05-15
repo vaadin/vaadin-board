@@ -228,9 +228,7 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
         _recalculateFlexBasis(forceResize) {
           const width = this.getBoundingClientRect().width;
           const breakpoints = this._measureBreakpointsInPx();
-          if (forceResize || width != this._oldWidth
-              || breakpoints.smallSize != this._oldBreakpoints.smallSize
-              || breakpoints.mediumSize != this._oldBreakpoints.mediumSize) {
+          if (forceResize || this._shouldRecalculate(width, breakpoints)) {
             const nodes = this.$.insertionPoint.assignedNodes({ flatten: true });
             const isElementNode = function (node) {
               return !((node.nodeType === node.TEXT_NODE)
@@ -251,6 +249,37 @@ This program is available under Commercial Vaadin Add-On License 3.0, available 
             this._oldWidth = width;
             this._oldBreakpoints = breakpoints;
           }
+        }
+
+        /** @private */
+        _shouldRecalculate(width, breakpoints) {
+          // Should not recalculate if row is invisible
+          if (this._isElementHidden()) {
+            return false;
+          }
+          return (
+            width !== this._oldWidth ||
+            breakpoints.smallSize !== this._oldBreakpoints.smallSize ||
+            breakpoints.mediumSize !== this._oldBreakpoints.mediumSize
+          );
+        }
+
+        /** @private */
+        _isElementHidden() {
+          // `offsetParent` is `null` when the element itself
+          // or one of its ancestors is hidden with `display: none`.
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
+          // However `offsetParent` is also null when the element is using fixed
+          // positioning, so additionally check if the element takes up layout space.
+          if (this.offsetParent === null && this.clientWidth === 0 && this.clientHeight === 0) {
+            return true;
+          }
+          // Check inline style first to save a re-flow.
+          if (this.style.visibility === 'hidden' || this.style.display === 'none') {
+            return true;
+          }
+          const computedStyle = window.getComputedStyle(this);
+          return computedStyle.visibility === 'hidden' || computedStyle.display === 'none';
         }
 
         /**
